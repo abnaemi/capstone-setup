@@ -1,5 +1,7 @@
 import {useState} from "react";
 import {NewTicket} from "./model/Ticket";
+import Button from "@mui/material/Button";
+import Input from "@mui/material/Input";
 
 
 type Props ={
@@ -28,14 +30,14 @@ export default function AddTicket(props: Props) {
 
         <div>
 
-            <input value={name} onChange={(event)=>{setName(event.target.value)}}/>
-            <input value={title} onChange={(event)=>{setTitle(event.target.value)}}/>
-            <input value={content} onChange={(event)=>{setContent(event.target.value)}}/>
-            <input value={phone} onChange={(event)=>{setPhone(event.target.value)}}/>
-            <input value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
-            <input value={customer} onChange={(event)=>{setCustomer(event.target.value)}}/>
-            <input value={number} onChange={(event)=>{setNumber(event.target.value)}}/>
-            <button onClick={onSaveTicket}>Save</button>
+            Name: <Input value={name} onChange={(event)=>{setName(event.target.value)}}/>
+           Title: <Input value={title} onChange={(event)=>{setTitle(event.target.value)}}/>
+           Content: <Input value={content} onChange={(event)=>{setContent(event.target.value)}}/>
+           Phone: <Input value={phone} onChange={(event)=>{setPhone(event.target.value)}}/>
+           Email: <Input value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
+            Customer:<Input value={customer} onChange={(event)=>{setCustomer(event.target.value)}}/>
+            Number:<Input value={number} onChange={(event)=>{setNumber(event.target.value)}}/>
+            <Button variant="outlined" onClick={onSaveTicket}>Save</Button>
 
 
         </div>

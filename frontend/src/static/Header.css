@@ -1,8 +1,9 @@
 .Header {
-    color: black;
-    background-color: lightgray;
-    text-align: left;
-
+    color: white;
+    background-color: lightskyblue;
+    text-align: center;
+    font-size: 12px;
+    font-family: "Arial";
     padding: 10px;
     bottom: 0;
     width: 100%;

@@ -1,12 +1,12 @@
-import {NavLink} from "react-router-dom";
-import "./Navigationbar.css"
+
+import {Link} from "@mui/material";
 export default function NavigationBar() {
     return (
 
     <div className="Navigationbar">
-    <NavLink className="NavigationItem" to={"/menu"}>View Tickets</NavLink>
-    <NavLink className="NavigationItem" to={"/archives"}>Archived Tickets</NavLink>
-    <NavLink  className="NavigationItem" to={"/add"}>Add Tickets</NavLink>
+        <Link href="/menu">View Tickets  </Link>
+        <Link href="/archives">Archived Tickets   </Link>
+        <Link href="/add">Add Tickets   </Link>
     </div>
 )
 

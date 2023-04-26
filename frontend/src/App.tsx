@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./static/Header";
 
 import 'react-toastify/dist/ReactToastify.css';
-import {BrowserRouter,} from "react-router-dom";
+import {BrowserRouter, Route, Routes,} from "react-router-dom";
 
 import TicketGallery from "./TicketGallery";
 import {NewTicket, Ticket} from "./model/Ticket";
@@ -37,10 +37,18 @@ function App() {
       <div className="App">
           <BrowserRouter>
               <Header/>
-              <TicketGallery tickets={tickets}/>
-              <AddTicket  addTicket={addTicket}/>
+              <Routes>
+                  <Route path={"/menu"} element={
+                      <TicketGallery tickets={tickets}/>
+                  }/>
+
+                  <Route path={"/add"} element={
+                      <AddTicket  addTicket={addTicket}/>
+                  }/>
 
 
+
+              </Routes>
           </BrowserRouter>
 
 
