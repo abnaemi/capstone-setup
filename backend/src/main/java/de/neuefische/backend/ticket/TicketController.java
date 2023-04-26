@@ -1,4 +1,4 @@
-package ticket;
+package de.neuefische.backend.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

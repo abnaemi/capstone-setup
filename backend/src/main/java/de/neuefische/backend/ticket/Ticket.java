@@ -1,6 +1,8 @@
-package ticket;
-import comment.Comment;
+package de.neuefische.backend.ticket;
+import de.neuefische.backend.comment.Comment;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import java.util.List;
 
 public record Ticket(
@@ -14,6 +16,7 @@ public record Ticket(
         String email,
         String customer,
         String number,
+        @DBRef
         List<Comment> comment,
         TicketStatus ticketStatus
 

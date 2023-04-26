@@ -1,4 +1,4 @@
-package ticket;
+package de.neuefische.backend.ticket;
 
 public enum TicketStatus {
 

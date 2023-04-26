@@ -1,13 +1,10 @@
-package ticket;
-
+package de.neuefische.backend.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-@RequiredArgsConstructor
+
 @Service
-
-
+@RequiredArgsConstructor
 public class TicketService {
 
 
