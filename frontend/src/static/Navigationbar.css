@@ -2,7 +2,7 @@
 
     display: flex;
     justify-content: space-around;
-    background-color: antiquewhite;
+    background-color: lightgray;
     align-items: center;
     height: 5vh;
 
@@ -17,9 +17,10 @@
     color: black;
     width: 50%;
     height: inherit;
+
     border: 1px #3f3f3f solid;
 
 }
 .NavigationItem:hover{
-    background-color: burlywood;
+    background-color: darkgray;
 }
