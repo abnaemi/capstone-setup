@@ -1,5 +1,6 @@
 import {Ticket} from "./model/Ticket";
 import TicketCard from "./TicketCard";
+import "./TicketGallery.css"
 
 type Props = {
     tickets: Ticket[]
@@ -12,19 +13,21 @@ export default function TicketGallery(props: Props){
 
     return (
         <div>
-
-            <h4 className="Status">Open Tickets: </h4>
+            <div className="StatusOpen">
+            <h4>Open Tickets: </h4>
             {
                 openTickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket}/>)
-            }
-            <h4 className="Status">In Progress Tickets: </h4>
+            } </div>
+            <div className="StatusInProgress">
+            <h4>In Progress Tickets: </h4>
             {
                 inProgressTickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket}/>)
-            }
-            <h4 className="Status">Done Tickets: </h4>
+            } </div>
+            <div className="StatusDone">
+            <h4>Done Tickets: </h4>
             {
                 doneTickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket}/>)
-            }
+            } </div>
         </div>
 
     )

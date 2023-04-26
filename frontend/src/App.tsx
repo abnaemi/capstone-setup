@@ -4,7 +4,7 @@ import Header from "./static/Header";
 
 import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter} from "react-router-dom";
-import Footer from "./static/Footer";
+
 import TicketGallery from "./TicketGallery";
 import {Ticket} from "./model/Ticket";
 import axios from "axios";
@@ -28,7 +28,6 @@ function App() {
       <div>
           <BrowserRouter>
               <Header/>
-              <Footer/>
               <TicketGallery tickets={tickets}/>
           </BrowserRouter>
 
