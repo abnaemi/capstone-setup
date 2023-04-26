@@ -1,24 +1,22 @@
 .Navigationbar {
-
-    display: flex;
-    justify-content: space-around;
     background-color: lightgray;
-    align-items: center;
-    height: 5vh;
+    height: 3vh;
 
 
 }
 
 .NavigationItem {
 
-    font-size: 22px;
+
+    font-size: 15px;
     line-height: 5vh;
     text-decoration: none;
     color: black;
     width: 50%;
     height: inherit;
     border: 1px #3f3f3f solid;
-    border-radius: 11px;
+
+
 
 }
 .NavigationItem:hover{
