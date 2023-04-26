@@ -2,6 +2,7 @@ package ticket;
 
 import comment.Comment;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,8 +42,22 @@ class TicketServiceTest {
 
 
     }
-
+    @DirtiesContext
     @Test
     void createTicket() {
+        Comment comment = new Comment("1","comment");
+        List <Comment> commentList = new ArrayList<>();
+        commentList.add(comment);
+        Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",commentList,TicketStatus.OPEN);
+
+        when(ticketRepository.save(expected)).thenReturn(expected);
+
+        Ticket actual = ticketService.createTicket(expected);
+
+        verify(ticketRepository).save(expected);
+        assertEquals(actual,expected);
+
+
+
     }
 }
