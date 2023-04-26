@@ -40,6 +40,7 @@ class TicketIntegrationTest {
     }
 
 
+    @DirtiesContext
     @Test
     void getAll_shouldReturnAllTickets() throws Exception {
         ticketRepository.save(ticketone);
@@ -56,7 +57,7 @@ class TicketIntegrationTest {
                         "title": "Title",
                         "content": "content",
                         "phone": "123",
-                        "email": "johndoe@email.com",
+                        "email": "email",
                         "customer": "customer",
                         "number": "999",
                         "comment": [],
