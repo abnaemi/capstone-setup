@@ -1,17 +1,20 @@
 .StatusOpen {
 display:flex;
 flex-direction: column;
-    border: 2px black solid;
+    border: 1px black solid;
+    border: double;
 }
 
 .StatusInProgress {
     display:flex;
     flex-direction: column;
-    border: 2px black solid;
+    border: 1px black solid;
+    border: double;
 }
 
 .StatusDone {
     display:flex;
     flex-direction: column;
-    border: 2px black solid;
+    border: 1px black solid;
+    border: double;
 }

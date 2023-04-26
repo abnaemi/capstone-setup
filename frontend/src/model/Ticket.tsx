@@ -14,3 +14,8 @@ export type Ticket= {
     status: "OPEN" | "IN_PROGRESS" | "DONE"
 
 }
+
+export type NewTicket = {
+    title: string
+    status: "OPEN" | "IN_PROGRESS" | "DONE"
+}
