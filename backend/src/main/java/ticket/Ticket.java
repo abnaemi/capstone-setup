@@ -1,5 +1,4 @@
 package ticket;
-
 import comment.Comment;
 import org.springframework.data.annotation.Id;
 import java.util.List;
