@@ -109,7 +109,7 @@ class TicketIntegrationTest {
                 dummyTicket.customer(),
                 dummyTicket.number(),
                 dummyTicket.comment(),
-                dummyTicket.ticketStatus());
+                dummyTicket.status());
         assertThat(ticketRepository.findAll()).contains(expected);
     }
 }

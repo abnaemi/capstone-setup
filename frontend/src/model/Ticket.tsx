@@ -10,7 +10,7 @@ export type Ticket= {
     email: string,
     customer: string,
     number: string,
-    comment: Comment[]
-    ticketstatus: string
+    comment: Comment[],
+    status: "OPEN" | "IN_PROGRESS" | "DONE"
 
 }

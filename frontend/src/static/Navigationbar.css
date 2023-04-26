@@ -17,8 +17,8 @@
     color: black;
     width: 50%;
     height: inherit;
-
     border: 1px #3f3f3f solid;
+    border-radius: 11px;
 
 }
 .NavigationItem:hover{

@@ -18,7 +18,7 @@ public record Ticket(
         String number,
         @DBRef
         List<Comment> comment,
-        TicketStatus ticketStatus
+        TicketStatus status
 
 
 

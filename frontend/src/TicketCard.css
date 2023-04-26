@@ -1,0 +1,6 @@
+.TicketCard {
+    border: 1px black solid;
+    margin: 5px;
+    border-radius: 11px;
+    flex-grow:4;
+}
