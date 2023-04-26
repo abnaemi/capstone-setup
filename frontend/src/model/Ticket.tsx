@@ -16,6 +16,13 @@ export type Ticket= {
 }
 
 export type NewTicket = {
-    title: string
+
+    name: string,
+    title: string,
+    content: string,
+    phone: string,
+    email: string,
+    customer: string,
+    number: string,
     status: "OPEN" | "IN_PROGRESS" | "DONE"
 }
