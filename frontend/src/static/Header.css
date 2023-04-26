@@ -2,14 +2,14 @@
     color: white;
     background-color: lightskyblue;
     text-align: center;
-    font-size: 12px;
-    font-family: "Arial";
+    font-size: 24px;
+    font-family: 'Lucida Sans', Arial, sans-serif;
     padding: 10px;
-    bottom: 0;
+    bottom: 20px;
     width: 100%;
-
+    margin-top: -40px;
     height: auto;
 
-    max-height: 123px;
+    max-height: 200px;
 
 }
