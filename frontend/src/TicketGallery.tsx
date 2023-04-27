@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import "./TicketGallery.css";
@@ -20,20 +21,20 @@ export default function TicketGallery(props: Props) {
 
     return (
         <div>
-            <div id="open-tickets">
-                <h4>Open Tickets: </h4>
+            <div className="tickets">
+                <Typography variant="h5" component="h2">Open Tickets: </Typography>
                 {openTickets.map((ticket) => (
                     <TicketCard key={ticket.id} ticket={ticket} />
                 ))}
             </div>
-            <div id="in-progress-tickets">
-                <h4>In Progress Tickets: </h4>
+            <div className="tickets">
+                <Typography variant="h5" component="h2">In Progress Tickets: </Typography>
                 {inProgressTickets.map((ticket) => (
                     <TicketCard key={ticket.id} ticket={ticket} />
                 ))}
             </div>
-            <div id="done-tickets">
-                <h4>Done Tickets: </h4>
+            <div className="tickets">
+                <Typography variant="h5" component="h2">Done Tickets: </Typography>
                 {doneTickets.map((ticket) => (
                     <TicketCard key={ticket.id} ticket={ticket} />
                 ))}
