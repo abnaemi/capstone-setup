@@ -68,6 +68,8 @@ export default function AddTicket(props: Props) {
             />
             <Input
                 placeholder="Content"
+                multiline
+                rows={10}
                 value={content}
                 onChange={(event) => {
                     setContent(event.target.value);
