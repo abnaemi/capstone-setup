@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -107,6 +109,50 @@ class TicketIntegrationTest {
                 ));
     }
 
+    @Test
+    @DirtiesContext
+    void updateTicket_shouldReturnUpdatedTicket() throws Exception {
+        // Given
+        Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticketone);
 
+        // When
+        Ticket updatedTicket = new Ticket("1","Tom","Updated Title","Updated Content","123","email","customer","999",new ArrayList<>(), TicketStatus.IN_PROGRESS);
+        mockMvc.perform(put("/api/tickets/1/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                            {
+                                "id": "1",
+                                "name": "Tom",
+                                "title": "Updated Title",
+                                "content": "Updated Content",
+                                "phone": "123",
+                                "email": "email",
+                                "customer": "customer",
+                                "prio": "999",
+                                "comment": [],
+                                "status": "IN_PROGRESS"
+                            }
+                            """
+                        ))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                {
+                    "id": "1",
+                    "name": "Tom",
+                    "title": "Updated Title",
+                    "content": "Updated Content",
+                    "phone": "123",
+                    "email": "email",
+                    "customer": "customer",
+                    "prio": "999",
+                    "comment": [],
+                    "status": "IN_PROGRESS"
+                }
+                """));
+
+        // Then
+        assertEquals(updatedTicket, ticketRepository.findById("1").get());
+    }
 
 }

@@ -17,4 +17,10 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    public Ticket updateTicket (Ticket ticket) {
+        return ticketRepository.save(ticket);
+    }
+
+
+
 }

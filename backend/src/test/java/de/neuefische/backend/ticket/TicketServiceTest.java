@@ -56,4 +56,18 @@ class TicketServiceTest {
 
 
     }
+    @DirtiesContext
+    @Test
+    void updateTicket_updatesExistingTicket() {
+        Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        ticketService.createTicket(originalTicket);
+
+        Ticket updateTicket = new Ticket("2","Max","NoTitle","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        ticketService.updateTicket(updateTicket);
+
+        List<Ticket> allTickets = ticketService.getAllTickets();
+        assertEquals(0, allTickets.size());
+
+    }
+
 }
