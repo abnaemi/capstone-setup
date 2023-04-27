@@ -63,8 +63,8 @@ export default function TicketCard(props: Props) {
                         </Typography>
                     </Grid>
 
-                    {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" size="small" onClick={changeStatusClick}>Advance Status</Button>}
                     {props.ticket.status !== 'OPEN' && <Button variant="contained" size="small" onClick={changeStatusPrevious}>Previous Status</Button>}
+                    {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" size="small" onClick={changeStatusClick}>Advance Status</Button>}
 
 
                 </Grid>
