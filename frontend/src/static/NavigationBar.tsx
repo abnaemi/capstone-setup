@@ -16,7 +16,7 @@ export default function NavigationBar() {
 
                         <NavLink className={"NavLink"}  to={"/menu"}> View Tickets | </NavLink>
                         <NavLink className={"NavLink"} to={"/archives"}> Archived Tickets | </NavLink>
-                        <NavLink className={"NavLink"}  to={"/add"}> Create Ticket | </NavLink>
+                        <NavLink className={"NavLink"}  to={"/add"}> Create Ticket  </NavLink>
                     </div>
 
                 }</Toolbar>
