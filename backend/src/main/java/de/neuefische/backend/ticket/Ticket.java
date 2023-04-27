@@ -15,7 +15,7 @@ public record Ticket(
         String phone,
         String email,
         String customer,
-        String number,
+        String prio,
         @DBRef
         List<Comment> comment,
         TicketStatus status

@@ -9,7 +9,7 @@ export type Ticket= {
     phone: string,
     email: string,
     customer: string,
-    number: string,
+    prio: string,
     comment: Comment[],
     status: "OPEN" | "IN_PROGRESS" | "DONE"
 
@@ -23,6 +23,6 @@ export type NewTicket = {
     phone: string,
     email: string,
     customer: string,
-    number: string,
+    prio: string,
     status: "OPEN" | "IN_PROGRESS" | "DONE"
 }

@@ -16,10 +16,10 @@ export default function AddTicket(props: Props) {
     const [phone, setPhone] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [customer, setCustomer] = useState<string>("")
-    const [number, setNumber] = useState<string>("")
+    const [prio, setPrio] = useState<string>("")
 
     function onSaveTicket(){
-      const newTicket: NewTicket = {name: name, title: title,content:content,phone:phone,email:email,customer:customer,number:number, status: "OPEN"}
+      const newTicket: NewTicket = {name: name, title: title,content:content,phone:phone,email:email,customer:customer,prio:prio, status: "OPEN"}
 
      props.addTicket(newTicket)
     }
@@ -36,7 +36,7 @@ export default function AddTicket(props: Props) {
            Phone: <Input value={phone} onChange={(event)=>{setPhone(event.target.value)}}/>
            Email: <Input value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
             Customer:<Input value={customer} onChange={(event)=>{setCustomer(event.target.value)}}/>
-            Number:<Input value={number} onChange={(event)=>{setNumber(event.target.value)}}/>
+            Prio:<Input value={prio} onChange={(event)=>{setPrio(event.target.value)}}/>
             <Button variant="outlined" onClick={onSaveTicket}>Save</Button>
 
 

@@ -59,7 +59,7 @@ class TicketIntegrationTest {
                         "phone": "123",
                         "email": "email",
                         "customer": "customer",
-                        "number": "999",
+                        "prio": "999",
                         "comment": [],
                         "status": "OPEN"
                     }
@@ -82,7 +82,7 @@ class TicketIntegrationTest {
                         "phone": "123",
                         "email": "johndoe@email.com",
                         "customer": "customer",
-                        "number": "999",
+                        "prio": "999",
                         "comment": [],
                         "status": "OPEN"
                                 }
@@ -99,7 +99,7 @@ class TicketIntegrationTest {
                         "phone": "123",
                         "email": "johndoe@email.com",
                         "customer": "customer",
-                        "number": "999",
+                        "prio": "999",
                         "comment": [],
                         "status": "OPEN"
                                 }
