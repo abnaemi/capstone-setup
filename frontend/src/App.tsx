@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
 
 import TicketGallery from "./TicketGallery";
+import ArchivedGallery from "./ArchivedGallery";
 import {NewTicket, Ticket} from "./model/Ticket";
 import axios from "axios";
 import AddTicket from "./AddTicket";
@@ -61,7 +62,9 @@ function App() {
                   <Route path={"/add"} element={
                       <AddTicket  addTicket={addTicket}/>
                   }/>
-
+                  <Route path={"/archives"} element={
+                      <ArchivedGallery  tickets={tickets} updateTicket={updateTicket}/>
+                  }/>
 
 
               </Routes>

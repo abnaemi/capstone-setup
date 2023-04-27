@@ -9,21 +9,17 @@ type Props = {
 export default function TicketCard(props: Props) {
 
 
-    const nextStatus: {OPEN: "IN_PROGRESS", IN_PROGRESS:"DONE", DONE:"DONE"} = {
+    const nextStatus: {OPEN: "IN_PROGRESS", IN_PROGRESS:"DONE", DONE:"ARCHIVED",ARCHIVED:"ARCHIVED"} = {
         "OPEN" : "IN_PROGRESS" ,
         "IN_PROGRESS" : "DONE",
-        "DONE" : "DONE"
+        "DONE" : "ARCHIVED",
+        "ARCHIVED" : "ARCHIVED",
     }
     function changeStatusClick(){
 
         const ticketToUpdate: Ticket = {...props.ticket, status: nextStatus[props.ticket.status]}
         props.updateTicket(ticketToUpdate)
     }
-
-
-
-
-
 
 
     return (
@@ -56,7 +52,8 @@ export default function TicketCard(props: Props) {
                         </Typography>
                     </Grid>
 
-                    <Button variant="contained" onClick={changeStatusClick}>Change Status</Button>
+                    {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" onClick={changeStatusClick}>Change Status</Button>}
+
                 </Grid>
             </CardContent>
         </Card>
