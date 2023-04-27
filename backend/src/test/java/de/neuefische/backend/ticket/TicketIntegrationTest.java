@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -188,7 +189,7 @@ class TicketIntegrationTest {
                 // Then
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException))
-                .andExpect(result -> assertEquals("The id in the url does not match the request body's id", result.getResolvedException().getMessage()));
+                .andExpect(result -> assertEquals( "400" + BAD_REQUEST + "The id in the url does not match the request body's id", result.getResolvedException().getMessage()));
     }
 
 
