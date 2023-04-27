@@ -163,7 +163,7 @@ class TicketIntegrationTest {
     @DirtiesContext
     void updateTicket_shouldThrowBadRequestExceptionWhenIdDoesNotMatch() throws Exception {
         // Given
-        Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        Ticket ticketone = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
         ticketRepository.save(ticketone);
 
         // When
@@ -172,25 +172,24 @@ class TicketIntegrationTest {
         mockMvc.perform(put("/api/tickets/" + ticketone.id() + "/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                        {
-                            "id": "%s",
-                            "name": "Tom",
-                            "title": "Updated Title",
-                            "content": "Updated Content",
-                            "phone": "123",
-                            "email": "email",
-                            "customer": "customer",
-                            "prio": "999",
-                            "comment": [],
-                            "status": "IN_PROGRESS"
-                        }
-                        """.formatted(differentId)
+                                {
+                                    "id": "%s",
+                                    "name": "Tom",
+                                    "title": "Updated Title",
+                                    "content": "Updated Content",
+                                    "phone": "123",
+                                    "email": "email",
+                                    "customer": "customer",
+                                    "prio": "999",
+                                    "comment": [],
+                                    "status": "IN_PROGRESS"
+                                }
+                                """.formatted(differentId)
                         ))
                 // Then
                 .andExpect(status().isBadRequest())
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException))
-                .andExpect(result -> assertEquals( "400" + BAD_REQUEST + "The id in the url does not match the request body's id", result.getResolvedException().getMessage()));
+                .andExpect(result -> assertEquals(BAD_REQUEST + "The id in the url does not match the request body's id",
+                        result.getResolvedException().getMessage().trim()));
     }
 
-
-}
+    }
