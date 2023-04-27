@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -161,35 +160,36 @@ class TicketIntegrationTest {
 
     @Test
     @DirtiesContext
-    void updateTicket_shouldThrowBadRequestExceptionWhenIdDoesNotMatch() throws Exception {
+    void updateTicket_shouldThrowExceptionIfIdsDoNotMatch() throws Exception {
         // Given
-        Ticket ticketone = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
+        Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
         ticketRepository.save(ticketone);
 
         // When
-        String differentId = "2";
-        Ticket ticketWithDifferentId = new Ticket(differentId, "Tom", "Updated Title", "Updated Content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.IN_PROGRESS);
-        mockMvc.perform(put("/api/tickets/" + ticketone.id() + "/update")
+        mockMvc.perform(put("/api/tickets/1/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {
-                                    "id": "%s",
-                                    "name": "Tom",
-                                    "title": "Updated Title",
-                                    "content": "Updated Content",
-                                    "phone": "123",
-                                    "email": "email",
-                                    "customer": "customer",
-                                    "prio": "999",
-                                    "comment": [],
-                                    "status": "IN_PROGRESS"
-                                }
-                                """.formatted(differentId)
+                        {
+                            "id": "2",
+                            "name": "Tom",
+                            "title": "Updated Title",
+                            "content": "Updated Content",
+                            "phone": "123",
+                            "email": "email",
+                            "customer": "customer",
+                            "prio": "999",
+                            "comment": [],
+                            "status": "IN_PROGRESS"
+                        }
+                        """
                         ))
-                // Then
                 .andExpect(status().isBadRequest())
-                .andExpect(result -> assertEquals(BAD_REQUEST + "The id in the url does not match the request body's id",
-                        result.getResolvedException().getMessage().trim()));
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException))
+                .andExpect(result -> assertEquals("400 BAD_REQUEST \"The id in the url does not match the request body's id\"", result.getResolvedException().getMessage()));
+
+        // Then
+        assertEquals(ticketone, ticketRepository.findById("1").get());
     }
 
-    }
+
+}
