@@ -39,27 +39,27 @@ export default function TicketCard(props: Props) {
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
                         <Typography sx={{ fontSize: 12 }}>
-                           Title:  {props.ticket.title}
+                             {props.ticket.title}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography sx={{ fontSize: 12 }}>
-                           Customer: {props.ticket.customer}
+                            {props.ticket.customer}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 10 }}>
-                            Status: {props.ticket.status}
+                        <Typography sx={{ fontSize: 12 }}>
+                             {props.ticket.status}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 10 }}>
-                            Ticket Prio: {props.ticket.prio}
+                        <Typography sx={{ fontSize: 12 }}>
+                             {props.ticket.prio}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 10 }}>
-                            Ticket ID: {props.ticket.id}
+                        <Typography sx={{ fontSize: 12 }}>
+                             {props.ticket.id}
                         </Typography>
                     </Grid>
 

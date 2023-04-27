@@ -7,9 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -154,5 +157,39 @@ class TicketIntegrationTest {
         // Then
         assertEquals(updatedTicket, ticketRepository.findById("1").get());
     }
+
+    @Test
+    @DirtiesContext
+    void updateTicket_shouldThrowBadRequestExceptionWhenIdDoesNotMatch() throws Exception {
+        // Given
+        Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticketone);
+
+        // When
+        String differentId = "2";
+        Ticket ticketWithDifferentId = new Ticket(differentId, "Tom", "Updated Title", "Updated Content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.IN_PROGRESS);
+        mockMvc.perform(put("/api/tickets/" + ticketone.id() + "/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                        {
+                            "id": "%s",
+                            "name": "Tom",
+                            "title": "Updated Title",
+                            "content": "Updated Content",
+                            "phone": "123",
+                            "email": "email",
+                            "customer": "customer",
+                            "prio": "999",
+                            "comment": [],
+                            "status": "IN_PROGRESS"
+                        }
+                        """.formatted(differentId)
+                        ))
+                // Then
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException))
+                .andExpect(result -> assertEquals("The id in the url does not match the request body's id", result.getResolvedException().getMessage()));
+    }
+
 
 }
