@@ -5,7 +5,9 @@ import TicketCard from "./TicketCard";
 
 
 type Props = {
-    tickets: Ticket[];
+    tickets: Ticket[],
+
+    updateTicket: (ticket:Ticket) => void
 };
 
 export default function TicketGallery(props: Props) {
@@ -24,19 +26,19 @@ export default function TicketGallery(props: Props) {
             <div className="tickets">
                 <Typography variant="h6" component="h2"   sx={{ fontSize: 14 }} >Open Tickets: </Typography>
                 {openTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket}/>
                 ))}
             </div>
             <div className="tickets">
                 <Typography variant="h6" component="h2" sx={{ fontSize: 14 }} >In Progress Tickets: </Typography>
                 {inProgressTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} />
                 ))}
             </div>
             <div className="tickets">
                 <Typography variant="h6" component="h2" sx={{ fontSize: 14 }} >Done Tickets: </Typography>
                 {doneTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} />
                 ))}
             </div>
         </div>

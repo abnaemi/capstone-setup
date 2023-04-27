@@ -1,11 +1,31 @@
-import { Grid, Card, CardContent, Typography } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button } from '@mui/material';
 import { Ticket } from "./model/Ticket";
 
 type Props = {
-    ticket: Ticket
+    ticket: Ticket,
+    updateTicket:(ticket:Ticket) => void
 }
 
 export default function TicketCard(props: Props) {
+
+
+    const nextStatus: {OPEN: "IN_PROGRESS", IN_PROGRESS:"DONE", DONE:"DONE"} = {
+        "OPEN" : "IN_PROGRESS" ,
+        "IN_PROGRESS" : "DONE",
+        "DONE" : "DONE"
+    }
+    function changeStatusClick(){
+
+        const ticketToUpdate: Ticket = {...props.ticket, status: nextStatus[props.ticket.status]}
+        props.updateTicket(ticketToUpdate)
+    }
+
+
+
+
+
+
+
     return (
         <Card>
             <CardContent>
@@ -35,8 +55,11 @@ export default function TicketCard(props: Props) {
                             Ticket ID: {props.ticket.id}
                         </Typography>
                     </Grid>
+
+                    <Button variant="contained" onClick={changeStatusClick}>Change Status</Button>
                 </Grid>
             </CardContent>
         </Card>
-    );
+    )
 }
+

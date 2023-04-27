@@ -33,13 +33,29 @@ function App() {
             .catch(console.error)
     }
 
+    function updateTicket(ticket:Ticket){
+       axios.put(`/api/tickets/${ticket.id}`, ticket)
+           .then((response) => {
+               setTickets(tickets.map(currentTicket => {
+                   if (currentTicket.id === ticket.id) {
+                       return response.data
+                   }
+                   else {
+                       return currentTicket
+                   }
+               }))
+           })
+           .catch(console.error)
+
+    }
+
   return (
       <div className="App">
           <BrowserRouter>
               <Header/>
               <Routes>
                   <Route path={"/menu"} element={
-                      <TicketGallery tickets={tickets}/>
+                      <TicketGallery tickets={tickets} updateTicket={updateTicket}/>
                   }/>
 
                   <Route path={"/add"} element={
