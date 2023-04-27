@@ -1,7 +1,6 @@
 package de.neuefische.backend.ticket;
 import de.neuefische.backend.comment.Comment;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
 
