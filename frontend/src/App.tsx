@@ -64,6 +64,10 @@ function App() {
           <BrowserRouter>
               <Header/>
               <Routes>
+                  <Route path={"/"} element={
+                      <TicketGallery tickets={tickets} updateTicket={updateTicket} deleteTicket={deleteTicket}/>
+                  }/>
+
                   <Route path={"/menu"} element={
                       <TicketGallery tickets={tickets} updateTicket={updateTicket} deleteTicket={deleteTicket}/>
                   }/>
