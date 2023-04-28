@@ -192,4 +192,21 @@ class TicketIntegrationTest {
     }
 
 
+    @Test
+    @DirtiesContext
+    void deleteTicket_shouldDeleteTicket() throws Exception {
+        // Given
+        Ticket ticketToDelete = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticketToDelete);
+
+        // When
+        mockMvc.perform(delete("/api/tickets/1"))
+                .andExpect(status().isOk());
+
+        // Then
+        assertTrue(ticketRepository.findById("1").isEmpty());
+    }
+
+
+
 }

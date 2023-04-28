@@ -7,7 +7,9 @@ import TicketCard from "./TicketCard";
 type Props = {
     tickets: Ticket[],
 
-    updateTicket: (ticket:Ticket) => void
+    updateTicket: (ticket:Ticket) => void,
+
+    deleteTicket: (id:string) => void
 };
 
 export default function TicketGallery(props: Props) {
@@ -38,7 +40,7 @@ export default function TicketGallery(props: Props) {
                     </Grid>
                 </Grid>
                 {archivedTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket}/>
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket}/>
                 ))}
             </div>
 
