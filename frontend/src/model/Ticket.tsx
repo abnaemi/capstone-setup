@@ -11,7 +11,7 @@ export type Ticket= {
     customer: string,
     prio: string,
     comment: Comment[],
-    status: "OPEN" | "IN_PROGRESS" | "DONE"
+    status: "OPEN" | "IN_PROGRESS" | "DONE" | "ARCHIVED"
 
 }
 
@@ -24,5 +24,5 @@ export type NewTicket = {
     email: string,
     customer: string,
     prio: string,
-    status: "OPEN" | "IN_PROGRESS" | "DONE"
+    status: "OPEN" | "IN_PROGRESS" | "DONE" | "ARCHIVED"
 }

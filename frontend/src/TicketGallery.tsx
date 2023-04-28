@@ -1,11 +1,13 @@
-import { Typography } from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
-import "./TicketGallery.css";
+
 
 
 type Props = {
-    tickets: Ticket[];
+    tickets: Ticket[],
+
+    updateTicket: (ticket:Ticket) => void
 };
 
 export default function TicketGallery(props: Props) {
@@ -22,21 +24,78 @@ export default function TicketGallery(props: Props) {
     return (
         <div>
             <div className="tickets">
-                <Typography variant="h5" component="h2">Open Tickets: </Typography>
+
+
+
+                <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold'  }}>Title</Typography>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px', fontWeight: 'bold' }}>Customer</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14 , fontWeight: 'bold' }}>Status</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold'  }}>Prio</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14 , fontWeight: 'bold' }}>ID</Typography>
+                    </Grid>
+                </Grid>
+
+
+
+
                 {openTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket}/>
                 ))}
             </div>
             <div className="tickets">
-                <Typography variant="h5" component="h2">In Progress Tickets: </Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px' , fontWeight: 'bold' }}>Title</Typography>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px', fontWeight: 'bold' }}>Customer</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold'  }}>Status</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold'  }}>Prio</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold'  }}>ID</Typography>
+                    </Grid>
+                </Grid>
                 {inProgressTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} />
                 ))}
             </div>
             <div className="tickets">
-                <Typography variant="h5" component="h2">Done Tickets: </Typography>
-                {doneTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Title</Typography>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px' , fontWeight: 'bold' }}>Customer</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14 , fontWeight: 'bold' }}>Status</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14 , fontWeight: 'bold' }}>Prio</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold'  }}>ID</Typography>
+                    </Grid>
+                </Grid>                {doneTickets.map((ticket) => (
+                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} />
                 ))}
             </div>
         </div>
