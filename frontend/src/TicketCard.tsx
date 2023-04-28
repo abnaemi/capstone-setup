@@ -35,7 +35,11 @@ export default function TicketCard(props: Props) {
 
     return (
         <Card>
+
+
             <CardContent>
+
+
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
                         <Typography sx={{ fontSize: 12 }}>
@@ -63,8 +67,9 @@ export default function TicketCard(props: Props) {
                         </Typography>
                     </Grid>
 
-                    {props.ticket.status !== 'OPEN' && <Button variant="contained" size="small" onClick={changeStatusPrevious}>Previous Status</Button>}
+                    {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && <Button variant="contained" size="small" onClick={changeStatusPrevious}>Previous Status</Button>}
                     {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" size="small" onClick={changeStatusClick}>Advance Status</Button>}
+
 
 
                 </Grid>

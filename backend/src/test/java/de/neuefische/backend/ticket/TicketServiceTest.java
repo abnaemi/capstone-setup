@@ -70,4 +70,16 @@ class TicketServiceTest {
 
     }
 
+    @DirtiesContext
+    @Test
+    void deleteTicket_deletesExistingTicket() {
+        Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
+        ticketService.createTicket(originalTicket);
+
+        ticketService.deleteTicket("1");
+
+        assertEquals(0,ticketService.getAllTickets().size());
+
+    }
+
 }

@@ -25,7 +25,9 @@ export default function TicketGallery(props: Props) {
         <div>
             <div className="tickets">
 
-
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold'  }}>Open Tickets</Typography>
+                </Grid>
 
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
@@ -54,6 +56,10 @@ export default function TicketGallery(props: Props) {
                 ))}
             </div>
             <div className="tickets">
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold'  }}>In Progress Tickets</Typography>
+                </Grid>
+
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
                         <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px' , fontWeight: 'bold' }}>Title</Typography>
@@ -77,6 +83,10 @@ export default function TicketGallery(props: Props) {
                 ))}
             </div>
             <div className="tickets">
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold'  }}>Done Tickets</Typography>
+                </Grid>
+
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
                         <Typography variant="h6" component="h2"  sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Title</Typography>
