@@ -3,7 +3,8 @@ import { Ticket } from "./model/Ticket";
 
 type Props = {
     ticket: Ticket,
-    updateTicket:(ticket:Ticket) => void
+    updateTicket:(ticket:Ticket) => void,
+    deleteTicket:(id:string) => void
 }
 
 export default function TicketCard(props: Props) {
@@ -21,6 +22,10 @@ export default function TicketCard(props: Props) {
         props.updateTicket(ticketToUpdate)
     }
 
+    function deleteClick(){
+     props.deleteTicket(props.ticket.id)
+    }
+
     const previousStatus: {ARCHIVED: "DONE", DONE:"IN_PROGRESS", IN_PROGRESS:"OPEN",OPEN:"OPEN"} = {
         "ARCHIVED" : "DONE" ,
         "DONE" : "IN_PROGRESS",
@@ -33,6 +38,7 @@ export default function TicketCard(props: Props) {
         props.updateTicket(ticketToUpdate)
     }
 
+    // @ts-ignore
     return (
         <Card>
 
@@ -67,8 +73,10 @@ export default function TicketCard(props: Props) {
                         </Typography>
                     </Grid>
 
-                    {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && <Button variant="contained" size="small" onClick={changeStatusPrevious}>Previous Status</Button>}
-                    {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" size="small" onClick={changeStatusClick}>Advance Status</Button>}
+                    {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && <Button variant="contained" size="small" onClick={changeStatusPrevious}> Prior</Button>}
+                    {props.ticket.status !== 'ARCHIVED' && <Button variant="contained" size="small" onClick={changeStatusClick}>Next</Button>}
+
+                    {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && <Button variant="contained" size="small" onClick={deleteClick}>Delete</Button>}
 
 
 

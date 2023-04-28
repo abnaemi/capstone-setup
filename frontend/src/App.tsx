@@ -49,6 +49,15 @@ function App() {
            .catch(console.error)
 
     }
+    function deleteTicket(id: string) {
+        axios.delete('/api/tickets/' + id)
+            .then(() => {
+                setTickets(tickets.filter((ticket) => ticket.id !== id))
+            })
+            .catch(console.error)
+    }
+
+
 
   return (
       <div className="App">
@@ -56,14 +65,14 @@ function App() {
               <Header/>
               <Routes>
                   <Route path={"/menu"} element={
-                      <TicketGallery tickets={tickets} updateTicket={updateTicket}/>
+                      <TicketGallery tickets={tickets} updateTicket={updateTicket} deleteTicket={deleteTicket}/>
                   }/>
 
                   <Route path={"/add"} element={
                       <AddTicket  addTicket={addTicket}/>
                   }/>
                   <Route path={"/archives"} element={
-                      <ArchivedGallery  tickets={tickets} updateTicket={updateTicket}/>
+                      <ArchivedGallery  tickets={tickets} updateTicket={updateTicket} deleteTicket={deleteTicket}/>
                   }/>
 
 
