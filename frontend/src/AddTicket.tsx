@@ -3,6 +3,7 @@ import { NewTicket } from "./model/Ticket";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Box from "@mui/material/Box";
+import SaveIcon from "@mui/icons-material/Save"; // Import the save icon from Material-UI
 
 type Props = {
     addTicket: (newTicket: NewTicket) => void;
@@ -45,7 +46,7 @@ export default function AddTicket(props: Props) {
             sx={{
                 "& > :not(style)": { m: 1, width: "25ch" },
                 display: "flex",
-                flexDirection: "column"
+                flexDirection: "column",
             }}
             noValidate
             autoComplete="off"
@@ -56,7 +57,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setName(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Title"
@@ -64,7 +64,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setTitle(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Content"
@@ -74,7 +73,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setContent(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Phone"
@@ -82,7 +80,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setPhone(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Email"
@@ -90,7 +87,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setEmail(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Customer"
@@ -98,7 +94,6 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setCustomer(event.target.value);
                 }}
-
             />
             <Input
                 placeholder="Prio"
@@ -106,9 +101,12 @@ export default function AddTicket(props: Props) {
                 onChange={(event) => {
                     setPrio(event.target.value);
                 }}
-
             />
-            <Button variant="outlined" onClick={onSaveTicket}>
+            <Button
+                variant="outlined"
+                startIcon={<SaveIcon />}
+                onClick={onSaveTicket}
+            >
                 Save
             </Button>
         </Box>
