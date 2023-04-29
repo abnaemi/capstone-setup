@@ -19,6 +19,7 @@ export default function AddTicket(props: Props) {
     const [prio, setPrio] = useState<string>("");
 
     function onSaveTicket() {
+        const now = new Date();
         const newTicket: NewTicket = {
             name: name,
             title: title,
@@ -28,6 +29,7 @@ export default function AddTicket(props: Props) {
             customer: customer,
             prio: prio,
             status: "OPEN",
+            comment: [{ datetime: "System", comment: `Ticket created on ${now.toLocaleString()}` }]
         };
 
         props.addTicket(newTicket);
