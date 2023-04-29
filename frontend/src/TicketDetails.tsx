@@ -7,7 +7,7 @@ import { Ticket } from "./model/Ticket";
 import Box from "@mui/material/Box";
 
 export default function TicketDetail() {
-    const [ticket, setTicket] = useState<Ticket>();
+    const [ticket, setTicket] = useState<Ticket | null>(null);
     const [commentText, setCommentText] = useState("");
 
     const {id} = useParams<{ id: string }>();
@@ -16,7 +16,7 @@ export default function TicketDetail() {
         if (id) {
             loadTicketById(id);
         }
-    }, []);
+    }, [id]);
 
     function loadTicketById(id: string) {
         axios
@@ -39,7 +39,7 @@ export default function TicketDetail() {
             comment: commentText,
         };
         const updatedTicket = {
-            ...ticket!,
+            ...(ticket as Ticket),
             comment: [...ticket!.comment, newComment],
         };
         axios
@@ -78,7 +78,7 @@ export default function TicketDetail() {
             </Grid>
             <Grid item xs={12} sm={6}>
                 <Typography variant="h5">Comments</Typography>
-                {ticket?.comment.map((c) => (
+                {ticket?.comment?.map((c) => (
                     <Box key={c.datetime} sx={{border: "1px solid grey", p: 1, mt: 2}}>
                         <Typography variant="subtitle1">{c.datetime}</Typography>
                         <Typography variant="body1">{c.comment}</Typography>
