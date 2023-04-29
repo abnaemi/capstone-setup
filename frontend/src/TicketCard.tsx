@@ -3,6 +3,7 @@ import { Ticket } from "./model/Ticket";
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import {useNavigate} from "react-router-dom";
 
 type Props = {
     ticket: Ticket,
@@ -12,6 +13,8 @@ type Props = {
 
 export default function TicketCard(props: Props) {
 
+
+    const navigate = useNavigate()
     const nextStatus: { OPEN: "IN_PROGRESS", IN_PROGRESS: "DONE", DONE: "ARCHIVED", ARCHIVED: "ARCHIVED" } = {
         "OPEN": "IN_PROGRESS",
         "IN_PROGRESS": "DONE",
@@ -85,8 +88,11 @@ export default function TicketCard(props: Props) {
                     {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
                         <Button variant="contained" size="small" onClick={deleteClick}>
                             <DeleteIcon />
-                        </Button>
-                    )}
+                        </Button>)}
+
+                    <Button variant="contained" size="small" onClick={()=> {navigate("/product/details/" + props.ticket.id)}}>Details</Button>
+
+
                 </Grid>
             </CardContent>
         </Card>
