@@ -51,13 +51,7 @@ export default function AddTicket(props: Props) {
             noValidate
             autoComplete="off"
         >
-            <Input
-                placeholder="Name"
-                value={name}
-                onChange={(event) => {
-                    setName(event.target.value);
-                }}
-            />
+
             <Input
                 placeholder="Title"
                 value={title}
@@ -65,15 +59,31 @@ export default function AddTicket(props: Props) {
                     setTitle(event.target.value);
                 }}
             />
+
             <Input
-                placeholder="Content"
-                multiline
-                rows={10}
-                value={content}
+                placeholder="Customer"
+                value={customer}
                 onChange={(event) => {
-                    setContent(event.target.value);
+                    setCustomer(event.target.value);
                 }}
             />
+
+            <Input
+                placeholder="Prio"
+                value={prio}
+                onChange={(event) => {
+                    setPrio(event.target.value);
+                }}
+            />
+            <Input
+                placeholder="Name"
+                value={name}
+                onChange={(event) => {
+                    setName(event.target.value);
+                }}
+            />
+
+
             <Input
                 placeholder="Phone"
                 value={phone}
@@ -88,20 +98,18 @@ export default function AddTicket(props: Props) {
                     setEmail(event.target.value);
                 }}
             />
+
+
             <Input
-                placeholder="Customer"
-                value={customer}
+                placeholder="Content"
+                multiline
+                rows={10}
+                value={content}
                 onChange={(event) => {
-                    setCustomer(event.target.value);
+                    setContent(event.target.value);
                 }}
             />
-            <Input
-                placeholder="Prio"
-                value={prio}
-                onChange={(event) => {
-                    setPrio(event.target.value);
-                }}
-            />
+
             <Button
                 variant="outlined"
                 startIcon={<SaveIcon />}
