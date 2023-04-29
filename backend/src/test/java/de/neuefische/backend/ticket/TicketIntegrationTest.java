@@ -8,9 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -207,6 +205,42 @@ class TicketIntegrationTest {
         assertTrue(ticketRepository.findById("1").isEmpty());
     }
 
+    @Test
+    void givenTicketId_whenFindById_thenTicketShouldBeReturned() throws Exception {
+        // Given
+        Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticket);
+
+        // When
+        mockMvc.perform(get("/api/tickets/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(ticket.id()))
+                .andExpect(jsonPath("$.name").value(ticket.name()))
+                .andExpect(jsonPath("$.title").value(ticket.title()))
+                .andExpect(jsonPath("$.content").value(ticket.content()))
+                .andExpect(jsonPath("$.phone").value(ticket.phone()))
+                .andExpect(jsonPath("$.email").value(ticket.email()))
+                .andExpect(jsonPath("$.customer").value(ticket.customer()))
+                .andExpect(jsonPath("$.prio").value(ticket.prio()))
+                .andExpect(jsonPath("$.comment").isArray())
+                .andExpect(jsonPath("$.comment").isEmpty())
+                .andExpect(jsonPath("$.status").value(ticket.status().toString()));
+
+        // Then
+        assertTrue(ticketRepository.findById("1").isPresent());
+    }
+
+
+    @Test
+    @DirtiesContext
+    void findById_shouldReturnNotFoundIfTicketNotFound() throws Exception {
+        // Given an empty database
+
+        // When
+        mockMvc.perform(get("/api/tickets/1"))
+                // Then
+                .andExpect(status().isNotFound());
+    }
 
 
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,5 +39,14 @@ public class TicketController {
     void deleteTicket(@PathVariable String id) {
         ticketService.deleteTicket(id);
     }
+
+
+
+    @GetMapping("{id}")
+    Optional<Ticket> getTicketById(@PathVariable String id) {
+        return ticketService.findById(id);
+    }
+
+
 
 }

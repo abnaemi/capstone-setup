@@ -2,6 +2,7 @@ package de.neuefische.backend.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +26,9 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 
+
+    public Optional<Ticket> findById(String id) {
+        return ticketRepository.findById(id);
+    }
 
 }
