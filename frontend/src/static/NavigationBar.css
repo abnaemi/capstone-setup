@@ -2,3 +2,7 @@
 
     color: aliceblue;
 }
+
+.NavLink:hover {
+    filter: brightness(85%);
+}
