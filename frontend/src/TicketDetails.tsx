@@ -28,12 +28,14 @@ export default function TicketDetail() {
             });
     }
 
+
+
     function handleCommentSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (!commentText.trim()) {
             return;
         }
-        const newComment = { id:"", comment: commentText };
+        const newComment = { id: new Date().toLocaleString('de-DE'), comment: commentText };
         const updatedTicket = { ...ticket!, comment: [...ticket!.comment, newComment] };
         axios
             .put(`/api/tickets/${ticket?.id}`, updatedTicket)
