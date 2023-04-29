@@ -10,7 +10,7 @@ export default function TicketDetail() {
     const [ticket, setTicket] = useState<Ticket>();
     const [commentText, setCommentText] = useState("");
 
-    const { id } = useParams<{ id: string }>();
+    const {id} = useParams<{ id: string }>();
 
     useEffect(() => {
         if (id) {
@@ -58,18 +58,20 @@ export default function TicketDetail() {
             <Grid item xs={12} sm={6}>
                 <Typography variant="h6">Ticket Details:</Typography>
                 {ticket ? (
-
-                    <Box border={1} borderRadius={4} p={2} mb={2}>
-                        <Typography>ID: {ticket.id}</Typography>
-                        <Typography>Title: {ticket.title}</Typography>
-                        <Typography>Name: {ticket.name}</Typography>
-                        <Typography>Content: {ticket.content}</Typography>
-                        <Typography>Phone: {ticket.phone}</Typography>
-                        <Typography>Email: {ticket.email}</Typography>
-                        <Typography>Customer: {ticket.customer}</Typography>
-                        <Typography>Priority: {ticket.prio}</Typography>
-                    </Box>
-
+                    <div>
+                        <Box border={1} borderRadius={4} p={2} mb={2}>
+                            <Typography>ID: {ticket.id}</Typography>
+                            <Typography>Title: {ticket.title}</Typography>
+                            <Typography>Name: {ticket.name}</Typography>
+                            <Typography>Phone: {ticket.phone}</Typography>
+                            <Typography>Email: {ticket.email}</Typography>
+                            <Typography>Customer: {ticket.customer}</Typography>
+                            <Typography>Priority: {ticket.prio}</Typography>
+                        </Box>
+                        <Box border={1} borderRadius={4} p={2} mb={2}>
+                            <Typography>Content: {ticket.content}</Typography>
+                        </Box>
+                    </div>
                 ) : (
                     <div>Loading...</div>
                 )}
@@ -77,11 +79,10 @@ export default function TicketDetail() {
             <Grid item xs={12} sm={6}>
                 <Typography variant="h5">Comments</Typography>
                 {ticket?.comment.map((c) => (
-                    <Box key={c.datetime} sx={{ border: '1px solid grey', p: 1, mt: 2 }}>
+                    <Box key={c.datetime} sx={{border: "1px solid grey", p: 1, mt: 2}}>
                         <Typography variant="subtitle1">{c.datetime}</Typography>
                         <Typography variant="body1">{c.comment}</Typography>
                     </Box>
-
                 ))}
                 <form onSubmit={handleCommentSubmit}>
                     <TextField
