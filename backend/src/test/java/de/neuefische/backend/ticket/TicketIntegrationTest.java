@@ -205,26 +205,30 @@ class TicketIntegrationTest {
         assertTrue(ticketRepository.findById("1").isEmpty());
     }
 
+    @DirtiesContext
     @Test
     void givenTicketId_whenFindById_thenTicketShouldBeReturned() throws Exception {
         // Given
         Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
         ticketRepository.save(ticket);
 
-        // When
+        // When/Then
         mockMvc.perform(get("/api/tickets/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(ticket.id()))
-                .andExpect(jsonPath("$.name").value(ticket.name()))
-                .andExpect(jsonPath("$.title").value(ticket.title()))
-                .andExpect(jsonPath("$.content").value(ticket.content()))
-                .andExpect(jsonPath("$.phone").value(ticket.phone()))
-                .andExpect(jsonPath("$.email").value(ticket.email()))
-                .andExpect(jsonPath("$.customer").value(ticket.customer()))
-                .andExpect(jsonPath("$.prio").value(ticket.prio()))
-                .andExpect(jsonPath("$.comment").isArray())
-                .andExpect(jsonPath("$.comment").isEmpty())
-                .andExpect(jsonPath("$.status").value(ticket.status().toString()));
+                .andExpect(content().json("""
+                {
+                    "id": "1",
+                    "name": "Tom",
+                    "title": "Title",
+                    "content": "content",
+                    "phone": "123",
+                    "email": "email",
+                    "customer": "customer",
+                    "prio": "999",
+                    "comment": [],
+                    "status": "OPEN"
+                }
+            """));
 
         // Then
         assertTrue(ticketRepository.findById("1").isPresent());
@@ -234,10 +238,12 @@ class TicketIntegrationTest {
     @Test
     @DirtiesContext
     void findById_shouldReturnNotFoundIfTicketNotFound() throws Exception {
-        // Given an empty database
+        // Given
+        Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticket);
 
         // When
-        mockMvc.perform(get("/api/tickets/1"))
+        mockMvc.perform(get("/api/tickets/2"))
                 // Then
                 .andExpect(status().isNotFound());
     }
