@@ -7,6 +7,7 @@ import TicketGallery from "./TicketGallery";
 import ArchivedGallery from "./ArchivedGallery";
 import AddTicket from "./AddTicket";
 import useTickets from "./useTickets";
+import TicketDetail from "./TicketDetails";
 
 function App() {
 
@@ -33,6 +34,7 @@ const {tickets,addTicket,deleteTicket,updateTicket} = useTickets()
                   <Route path={"/archives"} element={
                       <ArchivedGallery  tickets={tickets} updateTicket={updateTicket} deleteTicket={deleteTicket}/>
                   }/>
+                  <Route path={"/product/details/:id"} element={< TicketDetail />}/>
 
 
               </Routes>
