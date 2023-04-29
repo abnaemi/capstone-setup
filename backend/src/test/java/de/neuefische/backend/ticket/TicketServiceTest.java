@@ -85,7 +85,7 @@ class TicketServiceTest {
     }
 
     @Test
-    void whenFindById_thenReturnOptionalTicket() {
+    void findById_thenReturnOptionalTicket() {
         // given
         Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
         when(ticketRepository.findById("1")).thenReturn(Optional.of(expected));

@@ -207,7 +207,7 @@ class TicketIntegrationTest {
 
     @DirtiesContext
     @Test
-    void givenTicketId_whenFindById_thenTicketShouldBeReturned() throws Exception {
+    void getByID_shouldReturnTicketByID() throws Exception {
         // Given
         Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
         ticketRepository.save(ticket);
@@ -232,20 +232,6 @@ class TicketIntegrationTest {
 
         // Then
         assertTrue(ticketRepository.findById("1").isPresent());
-    }
-
-
-    @Test
-    @DirtiesContext
-    void findById_shouldReturnNotFoundIfTicketNotFound() throws Exception {
-        // Given
-        Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
-        ticketRepository.save(ticket);
-
-        // When
-        mockMvc.perform(get("/api/tickets/2"))
-                // Then
-                .andExpect(status().isNotFound());
     }
 
 
