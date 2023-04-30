@@ -26,23 +26,27 @@ export default function TicketGallery(props: Props) {
             <Grid item xs={12}>
                 <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>{sectionTitle}</Typography>
             </Grid>
-            <Grid item xs={12} sm={2}>
-                <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Title</Typography>
-            </Grid>
-            <Grid item xs={12} sm={2}>
-                <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px', fontWeight: 'bold' }}>Customer</Typography>
-            </Grid>
-            <Grid item xs={12} sm={2}>
-                <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Status</Typography>
-            </Grid>
-            <Grid item xs={12} sm={2}>
-                <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Prio</Typography>
-            </Grid>
-            <Grid item xs={12} sm={2}>
-                <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>ID</Typography>
+            <Grid item xs={12} container wrap="nowrap" sx={{ overflowX: { xs: 'auto', sm: 'hidden' } }}>
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Title</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px', fontWeight: 'bold' }}>Customer</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Status</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Prio</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>ID</Typography>
+                </Grid>
             </Grid>
         </Grid>
     );
+
+
 
     return (
         <div>
