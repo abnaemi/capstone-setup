@@ -55,7 +55,7 @@ export default function TicketDetail() {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} md={4}>
                 <Typography variant="h6">Ticket Details:</Typography>
                 {ticket ? (
                     <div>
@@ -76,10 +76,10 @@ export default function TicketDetail() {
                     <div>Loading...</div>
                 )}
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} md={8}>
                 <Typography variant="h5">Comments</Typography>
                 {ticket?.comment?.map((c) => (
-                    <Box key={c.datetime} sx={{border: "1px solid grey", p: 1, mt: 2}}>
+                    <Box key={c.datetime} sx={{border: "1px solid grey", borderRadius: 4, p: 1, mt: 2}}>
                         <Typography variant="subtitle1">{c.datetime}</Typography>
                         <Typography variant="body1">{c.comment}</Typography>
                     </Box>

@@ -1,27 +1,69 @@
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    IconButton,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import "./NavigationBar.css";
-import {NavLink} from "react-router-dom";
-import {AppBar, Toolbar, Typography} from "@mui/material";
-import React from "react";
+
 export default function NavigationBar() {
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
+    const drawer = (
+        <div>
+            <List>
+                {[
+                    { text: "View Tickets", link: "/menu" },
+                    { text: "Archived Tickets", link: "/archives" },
+                    { text: "Create Ticket", link: "/add" },
+                ].map((item, index) => (
+                    <ListItem button key={index} component={NavLink} to={item.link}>
+                        <ListItemText primary={item.text} />
+                    </ListItem>
+                ))}
+            </List>
+        </div>
+    );
+
     return (
-
-
         <React.Fragment>
             <AppBar position="fixed">
-                <Toolbar>{
-
-                    <div>
-                        <Typography variant="h5">Ticketsystem</Typography>
-
-
-                        <NavLink className={"NavLink"}  to={"/menu"}> View Tickets | </NavLink>
-                        <NavLink className={"NavLink"} to={"/archives"}> Archived Tickets | </NavLink>
-                        <NavLink className={"NavLink"}  to={"/add"}> Create Ticket  </NavLink>
-                    </div>
-
-                }</Toolbar>
+                <Toolbar>
+                    <Typography variant="h5" className="title">
+                        Ticketsystem
+                    </Typography>
+                    <IconButton
+                        edge="end"
+                        color="inherit"
+                        aria-label="menu"
+                        onClick={handleDrawerToggle}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                </Toolbar>
             </AppBar>
-            <Toolbar/>
+            <Toolbar />
+            <nav>
+                <Drawer
+                    variant="temporary"
+                    anchor="right"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                >
+                    {drawer}
+                </Drawer>
+            </nav>
         </React.Fragment>
     );
 }

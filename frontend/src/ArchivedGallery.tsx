@@ -27,8 +27,19 @@ export default function TicketGallery(props: Props) {
     return (
         <div>
             <div className="tickets">
+
+                <Grid item xs={12} sm={2}>
+                    <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Archived Tickets</Typography>
+                </Grid>
                 <Grid container spacing={2}>
-                    <Grid item xs={2}>
+
+
+
+
+
+                    <Grid item xs={12} sm={2}>
+
+
                         <Typography
                             variant="h6"
                             component="h2"
@@ -43,7 +54,7 @@ export default function TicketGallery(props: Props) {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={2}>
+                    <Grid item xs={12} sm={2}>
                         <Typography
                             variant="h6"
                             component="h2"
@@ -57,7 +68,7 @@ export default function TicketGallery(props: Props) {
                             Customer
                         </Typography>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={12} sm={2}>
                         <Typography
                             variant="h6"
                             component="h2"
@@ -66,7 +77,7 @@ export default function TicketGallery(props: Props) {
                             Status
                         </Typography>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={12} sm={2}>
                         <Typography
                             variant="h6"
                             component="h2"
@@ -75,7 +86,7 @@ export default function TicketGallery(props: Props) {
                             Prio
                         </Typography>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={12} sm={2}>
                         <Typography
                             variant="h6"
                             component="h2"
@@ -84,7 +95,7 @@ export default function TicketGallery(props: Props) {
                             ID
                         </Typography>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={12} sm={2}>
                         <TextField
                             value={searchTerm}
                             onChange={handleSearchChange}
