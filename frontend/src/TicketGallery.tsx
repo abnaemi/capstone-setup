@@ -27,24 +27,26 @@ export default function TicketGallery(props: Props) {
                 <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>{sectionTitle}</Typography>
             </Grid>
             <Grid item xs={12} container wrap="nowrap" sx={{ overflowX: { xs: 'auto', sm: 'hidden' } }}>
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{ minWidth: '80px' }}>
                     <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '14px', paddingRight: '16px', fontWeight: 'bold' }}>Title</Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{ minWidth: '100px' }}>
                     <Typography variant="h6" component="h2" sx={{ fontSize: 14, paddingLeft: '8px', paddingRight: '16px', fontWeight: 'bold' }}>Customer</Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{ minWidth: '80px' }}>
                     <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Status</Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{ minWidth: '80px' }}>
                     <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>Prio</Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{ minWidth: '60px' }}>
                     <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: 'bold' }}>ID</Typography>
                 </Grid>
             </Grid>
         </Grid>
     );
+
+
 
 
 
