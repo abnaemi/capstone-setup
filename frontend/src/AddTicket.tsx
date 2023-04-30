@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NewTicket } from "./model/Ticket";
 import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import SaveIcon from "@mui/icons-material/Save";
 
 type Props = {
     addTicket: (newTicket: NewTicket) => void;
@@ -18,6 +19,7 @@ export default function AddTicket(props: Props) {
     const [prio, setPrio] = useState<string>("");
 
     function onSaveTicket() {
+        const now = new Date();
         const newTicket: NewTicket = {
             name: name,
             title: title,
@@ -26,7 +28,8 @@ export default function AddTicket(props: Props) {
             email: email,
             customer: customer,
             prio: prio,
-            status: "OPEN"
+            status: "OPEN",
+            comment: [{ datetime: "System", comment: `Ticket created on ${now.toLocaleString()}` }]
         };
 
         props.addTicket(newTicket);
@@ -43,72 +46,83 @@ export default function AddTicket(props: Props) {
         <Box
             component="form"
             sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
+                "& > :not(style)": { m: 1 },
                 display: "flex",
-                flexDirection: "column"
+                flexDirection: "column",
             }}
             noValidate
             autoComplete="off"
         >
-            <Input
-                placeholder="Name"
-                value={name}
-                onChange={(event) => {
-                    setName(event.target.value);
-                }}
-
-            />
-            <Input
-                placeholder="Title"
+            <TextField
+                label="Title"
+                variant="outlined"
                 value={title}
                 onChange={(event) => {
                     setTitle(event.target.value);
                 }}
-
             />
-            <Input
-                placeholder="Content"
+
+            <TextField
+                label="Customer"
+                variant="outlined"
+                value={customer}
+                onChange={(event) => {
+                    setCustomer(event.target.value);
+                }}
+            />
+
+            <TextField
+                label="Priority"
+                variant="outlined"
+                value={prio}
+                onChange={(event) => {
+                    setPrio(event.target.value);
+                }}
+            />
+
+            <TextField
+                label="Name"
+                variant="outlined"
+                value={name}
+                onChange={(event) => {
+                    setName(event.target.value);
+                }}
+            />
+
+            <TextField
+                label="Phone"
+                variant="outlined"
+                value={phone}
+                onChange={(event) => {
+                    setPhone(event.target.value);
+                }}
+            />
+
+            <TextField
+                label="Email"
+                variant="outlined"
+                value={email}
+                onChange={(event) => {
+                    setEmail(event.target.value);
+                }}
+            />
+
+            <TextField
+                label="Content"
+                variant="outlined"
                 multiline
                 rows={10}
                 value={content}
                 onChange={(event) => {
                     setContent(event.target.value);
                 }}
-
             />
-            <Input
-                placeholder="Phone"
-                value={phone}
-                onChange={(event) => {
-                    setPhone(event.target.value);
-                }}
 
-            />
-            <Input
-                placeholder="Email"
-                value={email}
-                onChange={(event) => {
-                    setEmail(event.target.value);
-                }}
-
-            />
-            <Input
-                placeholder="Customer"
-                value={customer}
-                onChange={(event) => {
-                    setCustomer(event.target.value);
-                }}
-
-            />
-            <Input
-                placeholder="Prio"
-                value={prio}
-                onChange={(event) => {
-                    setPrio(event.target.value);
-                }}
-
-            />
-            <Button variant="outlined" onClick={onSaveTicket}>
+            <Button
+                variant="outlined"
+                startIcon={<SaveIcon />}
+                onClick={onSaveTicket}
+            >
                 Save
             </Button>
         </Box>

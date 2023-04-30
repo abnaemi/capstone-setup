@@ -1,5 +1,5 @@
 export type Comment= {
 
-    id:string,
+    datetime:string,
     comment:string
 }

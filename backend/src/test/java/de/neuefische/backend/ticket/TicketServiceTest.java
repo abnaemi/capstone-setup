@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -80,6 +82,31 @@ class TicketServiceTest {
 
         assertEquals(0,ticketService.getAllTickets().size());
 
+    }
+
+    @Test
+    void findById_thenReturnOptionalTicket() {
+        // given
+        Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
+        when(ticketRepository.findById("1")).thenReturn(Optional.of(expected));
+
+        // when
+        Optional<Ticket> actual = ticketService.findById("1");
+
+        // then
+        assertEquals(expected, actual.get());
+    }
+
+    @Test
+    void whenFindById_withNonExistingId_thenReturnEmptyOptional() {
+        // given
+        when(ticketRepository.findById("1")).thenReturn(Optional.empty());
+
+        // when
+        Optional<Ticket> actual = ticketService.findById("1");
+
+        // then
+        assertEquals(Optional.empty(), actual);
     }
 
 }

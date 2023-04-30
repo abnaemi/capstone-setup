@@ -8,9 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -207,6 +205,34 @@ class TicketIntegrationTest {
         assertTrue(ticketRepository.findById("1").isEmpty());
     }
 
+    @DirtiesContext
+    @Test
+    void getByID_shouldReturnTicketByID() throws Exception {
+        // Given
+        Ticket ticket = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
+        ticketRepository.save(ticket);
+
+        // When/Then
+        mockMvc.perform(get("/api/tickets/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                {
+                    "id": "1",
+                    "name": "Tom",
+                    "title": "Title",
+                    "content": "content",
+                    "phone": "123",
+                    "email": "email",
+                    "customer": "customer",
+                    "prio": "999",
+                    "comment": [],
+                    "status": "OPEN"
+                }
+            """));
+
+        // Then
+        assertTrue(ticketRepository.findById("1").isPresent());
+    }
 
 
 }

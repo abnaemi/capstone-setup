@@ -5,7 +5,7 @@ package de.neuefische.backend.comment;
 public record Comment(
 
 
-        String id,
+        String datetime,
         String comment
 ) {
 }

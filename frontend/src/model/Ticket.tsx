@@ -24,5 +24,6 @@ export type NewTicket = {
     email: string,
     customer: string,
     prio: string,
+    comment: Comment[],
     status: "OPEN" | "IN_PROGRESS" | "DONE" | "ARCHIVED"
 }
