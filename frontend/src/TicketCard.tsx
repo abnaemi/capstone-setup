@@ -43,7 +43,7 @@ export default function TicketCard(props: Props) {
         props.updateTicket(ticketToUpdate)
     }
     return (
-        <Box marginBottom={-2}> {/* Change the value to adjust the gap */}
+        <Box marginBottom={-2}>
             <Card>
                 <CardContent>
                     <Grid container spacing={2}>
