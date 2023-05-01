@@ -1,31 +1,51 @@
-import {FormEvent, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, TextField, Box } from "@mui/material";
 
 type Props = {
-    onLogin: (username: string, password: string) => Promise<void>
-}
+    onLogin: (username: string, password: string) => Promise<void>;
+};
 
 export default function LoginPage(props: Props) {
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    const [username, setUsername] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+        event.preventDefault();
 
-        props.onLogin(username, password)
-            .then(() => {navigate("/menu")})
+        props.onLogin(username, password).then(() => {
+            navigate("/menu");
+        });
     }
 
     return (
         <form onSubmit={onSubmit}>
-            <input value={username} placeholder='username' type='text' onChange={e => setUsername(e.target.value)}/>
-            <input value={password} placeholder='password' type='password' onChange={e => setPassword(e.target.value)}/>
-            <button type='submit'>Login</button>
+            <Box marginBottom={2}>
+                <TextField
+
+                    value={username}
+                    label="Username"
+                    variant="outlined"
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </Box>
+            <Box marginBottom={2}>
+                <TextField
+
+                    value={password}
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </Box>
+            <Button  variant="contained" color="primary" type="submit">
+                Login
+            </Button>
         </form>
-    )
+    );
 }
 
 
