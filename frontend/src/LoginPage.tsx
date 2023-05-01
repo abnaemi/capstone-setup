@@ -41,10 +41,9 @@ export default function LoginPage(props: Props) {
             </Box>
             <Box marginBottom={2}>
                 <TextField
-                    sx={{ width: "75%", mt: 2 }}
+                    sx={{ width: "20%", mt: 2 }}
                     label="Warning"
-                    value="Please Logout using the Logout Button. Otherwise you can Login again without a Password.
-                    Also navigate using the Buttons. Dont refresh the site. If you refresh, you can Login again with the Username only"
+                    value="Please Logout with the Logout Button."
                     InputProps={{
                         readOnly: true,
                     }}
