@@ -1,9 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { NewTicket } from "./model/Ticket";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import SaveIcon from "@mui/icons-material/Save";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { SelectChangeEvent } from "@mui/material";
+
 
 type Props = {
     addTicket: (newTicket: NewTicket) => void;
@@ -42,6 +48,15 @@ export default function AddTicket(props: Props) {
         setPrio("");
     }
 
+    const handlePrioChange = (event: SelectChangeEvent<string>) => {
+        setPrio(event.target.value);
+    };
+
+    const handleCustomerChange = (event: SelectChangeEvent<string>) => {
+        setCustomer(event.target.value);
+    };
+
+
     return (
         <Box
             component="form"
@@ -62,23 +77,32 @@ export default function AddTicket(props: Props) {
                 }}
             />
 
-            <TextField
-                label="Customer"
-                variant="outlined"
-                value={customer}
-                onChange={(event) => {
-                    setCustomer(event.target.value);
-                }}
-            />
+            <FormControl variant="outlined">
+                <InputLabel id="customer-label">Customer</InputLabel>
+                <Select
+                    labelId="customer-label"
+                    label="Customer"
+                    value={customer}
+                    onChange={handleCustomerChange}
+                >
+                    <MenuItem value={"Standard"}>Standard</MenuItem>
+                    <MenuItem value={"Premium"}>Premium</MenuItem>
+                </Select>
+            </FormControl>
 
-            <TextField
-                label="Priority"
-                variant="outlined"
-                value={prio}
-                onChange={(event) => {
-                    setPrio(event.target.value);
-                }}
-            />
+            <FormControl variant="outlined">
+                <InputLabel id="priority-label">Priority</InputLabel>
+                <Select
+                    labelId="priority-label"
+                    label="Priority"
+                    value={prio}
+                    onChange={handlePrioChange}
+                >
+                    <MenuItem value={"Low"}>Low</MenuItem>
+                    <MenuItem value={"Medium"}>Medium</MenuItem>
+                    <MenuItem value={"High"}>High</MenuItem>
+                </Select>
+            </FormControl>
 
             <TextField
                 label="Name"

@@ -1,8 +1,19 @@
-.NavLink{
-
-    color: aliceblue;
+.NavLink {
+    color: white;
+    text-decoration: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .NavLink:hover {
-    filter: brightness(85%);
+    text-decoration: underline;
+}
+
+.title {
+    flex-grow: 1;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
 }

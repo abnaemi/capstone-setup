@@ -1,9 +1,9 @@
-import { Grid, Card, CardContent, Typography, Button } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import { Ticket } from "./model/Ticket";
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     ticket: Ticket,
@@ -42,59 +42,59 @@ export default function TicketCard(props: Props) {
         const ticketToUpdate: Ticket = { ...props.ticket, status: previousStatus[props.ticket.status] }
         props.updateTicket(ticketToUpdate)
     }
-
     return (
-        <Card>
-            <CardContent>
-                <Grid container spacing={2}>
-                    <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 12 }}>
-                            {props.ticket.title}
-                        </Typography>
+        <Box marginBottom={-2}>
+            <Card>
+                <CardContent>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={2}>
+                            <Typography sx={{ fontSize: 12 }}>
+                                {props.ticket.title}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            <Typography sx={{ fontSize: 12 }}>
+                                {props.ticket.customer}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            <Typography sx={{ fontSize: 12 }}>
+                                {props.ticket.status}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            <Typography sx={{ fontSize: 12 }}>
+                                {props.ticket.prio}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            <Typography sx={{ fontSize: 12 }}>
+                                {props.ticket.id}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
+                                <Button variant="contained" size="small" onClick={changeStatusPrevious}>
+                                    <KeyboardArrowLeftIcon />
+                                </Button>
+                            )}
+
+                            {props.ticket.status !== 'ARCHIVED' && (
+                                <Button variant="contained" size="small" onClick={changeStatusClick}>
+                                    <KeyboardArrowRightIcon />
+                                </Button>
+                            )}
+
+                            {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
+                                <Button variant="contained" size="small" onClick={deleteClick}>
+                                    <DeleteIcon />
+                                </Button>)}
+
+                            <Button variant="contained" size="small" onClick={() => { navigate("/product/details/" + props.ticket.id) }}>Details</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 12 }}>
-                            {props.ticket.customer}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 12 }}>
-                            {props.ticket.status}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 12 }}>
-                            {props.ticket.prio}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography sx={{ fontSize: 12 }}>
-                            {props.ticket.id}
-                        </Typography>
-                    </Grid>
-
-                    {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
-                        <Button variant="contained" size="small" onClick={changeStatusPrevious}>
-                            <KeyboardArrowLeftIcon />
-                        </Button>
-                    )}
-
-                    {props.ticket.status !== 'ARCHIVED' && (
-                        <Button variant="contained" size="small" onClick={changeStatusClick}>
-                            <KeyboardArrowRightIcon />
-                        </Button>
-                    )}
-
-                    {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
-                        <Button variant="contained" size="small" onClick={deleteClick}>
-                            <DeleteIcon />
-                        </Button>)}
-
-                    <Button variant="contained" size="small" onClick={()=> {navigate("/product/details/" + props.ticket.id)}}>Details</Button>
-
-
-                </Grid>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+        </Box>
     )
 }
