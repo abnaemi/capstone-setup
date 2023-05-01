@@ -27,7 +27,7 @@ export default function LogoutPage(props: Props) {
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-            <Button variant="contained" color="secondary" onClick={handleLogout} disabled={isLoading}>
+            <Button variant="contained" color="primary" onClick={handleLogout} disabled={isLoading}>
                 {isLoading ? "Logging out..." : "Logout"}
             </Button>
         </Box>

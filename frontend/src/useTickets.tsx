@@ -10,11 +10,10 @@ export default  function useTickets() {
         loadAllTickets()
     },[])
 
-    function loadAllTickets(){
+    function loadAllTickets() {
         axios.get("/api/tickets")
-            .then((response) => {setTickets(response.data)})
-            .catch((error) => {console.error(error)})
-
+            .then((response) => { setTickets(response.data) })
+            .catch((error) => { console.error(error) })
     }
 
     function addTicket(newTicket:NewTicket){
@@ -48,7 +47,7 @@ export default  function useTickets() {
             .catch(console.error)
     }
 
-return {tickets,addTicket,updateTicket,deleteTicket}
+return {tickets,addTicket,updateTicket,deleteTicket, loadAllTickets }
 
 
 

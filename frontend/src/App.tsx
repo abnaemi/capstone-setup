@@ -15,8 +15,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
 
 function App() {
-    const { tickets, addTicket, deleteTicket, updateTicket } = useTickets();
-    const { user, login, logout } = useUser();
+    const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
+    const { user, login, logout } = useUser(loadAllTickets);
 
     async function handleLogout() {
         await logout();

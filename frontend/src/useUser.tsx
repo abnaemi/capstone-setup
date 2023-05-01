@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function useUser() {
+export default function useUser(loadAllTickets: () => void) {
     const [user, setUser] = useState<string>();
 
     function login(username: string, password: string) {
@@ -9,6 +9,7 @@ export default function useUser() {
             .post("/api/users/login", undefined, { auth: { username, password } })
             .then((response) => {
                 setUser(response.data);
+                loadAllTickets(); // Call loadAllTickets after successful login
             });
     }
 
@@ -23,3 +24,4 @@ export default function useUser() {
 
     return { user, login, logout };
 }
+
