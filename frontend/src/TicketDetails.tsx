@@ -46,9 +46,11 @@ export default function TicketDetail() {
             .then((response) => {
                 setTicket(response.data);
                 setCommentText("");
+                toast.success("Comment added successfully!");
             })
             .catch((error) => {
-                toast.error("Failed to add comment");
+                console.error(error);
+                toast.error("Failed to add comment.");
             });
     }
 

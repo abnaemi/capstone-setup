@@ -12,6 +12,7 @@ export default function useUser(loadAllTickets: () => void) {
             });
             setUser(response.data);
             loadAllTickets();
+            toast.success("Login Successful!");
         } catch (error) {
             toast.error("Login Failed: Please check your username and password.");
         }
@@ -21,6 +22,8 @@ export default function useUser(loadAllTickets: () => void) {
         try {
             await axios.post("/api/users/logout");
             setUser(undefined);
+            toast.success("Logout Successful!");
+
         } catch (error) {
             console.error("Logout failed:", error);
         }
