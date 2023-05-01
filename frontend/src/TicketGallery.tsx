@@ -5,6 +5,8 @@ import React from "react";
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
+import TicketCustomerGraph from "./TicketCustomerGraph";
+
 
 
 type Props = {
@@ -62,6 +64,20 @@ export default function TicketGallery(props: Props) {
     };
 
 
+    const [openCustomerModal, setOpenCustomerModal] = React.useState(false);
+
+    const handleOpenCustomerModal = () => {
+        setOpenCustomerModal(true);
+    };
+
+    const handleCloseCustomerModal = () => {
+        setOpenCustomerModal(false);
+    };
+
+
+
+
+
     const renderGridHeaders = (sectionTitle: string) => (
         <Grid container spacing={2} sx={{ borderBottom: '1px solid #e0e0e0', paddingBottom: '-10px' }}>
             <Grid item xs={12}>
@@ -104,6 +120,23 @@ export default function TicketGallery(props: Props) {
                 </DialogContent>
             </Dialog>
 
+
+            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2 }}>
+                Show Ticket Customer Graph
+            </Button>
+            <Dialog
+                open={openCustomerModal}
+                onClose={handleCloseCustomerModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Customer Graph</DialogTitle>
+                <DialogContent>
+                    <TicketCustomerGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
+
+
             <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2 }}>
                 Show Ticket Priority Graph
             </Button>
@@ -118,6 +151,7 @@ export default function TicketGallery(props: Props) {
                     <TicketPriorityGraph tickets={props.tickets} />
                 </DialogContent>
             </Dialog>
+
 
 
             <div className="tickets">
