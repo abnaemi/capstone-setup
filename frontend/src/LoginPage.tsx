@@ -22,7 +22,7 @@ export default function LoginPage(props: Props) {
 
     return (
         <form onSubmit={onSubmit}>
-            <Box marginBottom={2}>
+            <Box marginBottom={2} marginTop={2}>
                 <TextField
 
                     value={username}
