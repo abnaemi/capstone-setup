@@ -1,16 +1,20 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function useUser(loadAllTickets: () => void) {
     const [user, setUser] = useState<string>();
 
-    function login(username: string, password: string) {
-        return axios
-            .post("/api/users/login", undefined, { auth: { username, password } })
-            .then((response) => {
-                setUser(response.data);
-                loadAllTickets(); // Call loadAllTickets after successful login
+    async function login(username: string, password: string) {
+        try {
+            const response = await axios.post("/api/users/login", undefined, {
+                auth: { username, password },
             });
+            setUser(response.data);
+            loadAllTickets();
+        } catch (error) {
+            toast.error("Login Failed: Please check your username and password.");
+        }
     }
 
     async function logout() {
@@ -24,4 +28,3 @@ export default function useUser(loadAllTickets: () => void) {
 
     return { user, login, logout };
 }
-
