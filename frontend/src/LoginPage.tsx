@@ -24,7 +24,6 @@ export default function LoginPage(props: Props) {
         <form onSubmit={onSubmit}>
             <Box marginBottom={2} marginTop={2}>
                 <TextField
-
                     value={username}
                     label="Username"
                     variant="outlined"
@@ -33,7 +32,6 @@ export default function LoginPage(props: Props) {
             </Box>
             <Box marginBottom={2}>
                 <TextField
-
                     value={password}
                     label="Password"
                     type="password"
@@ -41,7 +39,18 @@ export default function LoginPage(props: Props) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Box>
-            <Button  variant="contained" color="primary" type="submit">
+            <Box marginBottom={2}>
+                <TextField
+                    sx={{ width: "50%", mt: 2 }}
+                    label="Warning"
+                    value="Please Logout using the Logout Button. Otherwise you can Login again without a Password."
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    variant="outlined"
+                />
+            </Box>
+            <Button variant="contained" color="primary" type="submit">
                 Login
             </Button>
         </form>
