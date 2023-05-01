@@ -45,7 +45,9 @@ function App() {
                                     tickets={tickets}
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
+                                    refreshTickets={loadAllTickets}
                                 />
+
                             }
                         />
 
@@ -56,7 +58,9 @@ function App() {
                                     tickets={tickets}
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
+                                    refreshTickets={loadAllTickets}
                                 />
+
                             }
                         />
 

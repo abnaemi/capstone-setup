@@ -12,7 +12,9 @@ type Props = {
     tickets: Ticket[];
     updateTicket: (ticket: Ticket) => void;
     deleteTicket: (id: string) => void;
+    refreshTickets: () => void;
 };
+
 
 export default function TicketGallery(props: Props) {
     const openTickets: Ticket[] = props.tickets.filter(
@@ -151,6 +153,14 @@ export default function TicketGallery(props: Props) {
                 </DialogContent>
             </Dialog>
 
+            <Button
+                variant="contained"
+
+                onClick={props.refreshTickets}
+                sx={{ marginLeft: 2 }}
+            >
+                Refresh Tickets
+            </Button>
 
 
             <div className="tickets">
