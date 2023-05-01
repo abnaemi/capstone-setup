@@ -52,6 +52,10 @@ export default function AddTicket(props: Props) {
         setPrio(event.target.value);
     };
 
+    const handleCustomerChange = (event: SelectChangeEvent<string>) => {
+        setCustomer(event.target.value);
+    };
+
 
     return (
         <Box
@@ -73,14 +77,18 @@ export default function AddTicket(props: Props) {
                 }}
             />
 
-            <TextField
-                label="Customer"
-                variant="outlined"
-                value={customer}
-                onChange={(event) => {
-                    setCustomer(event.target.value);
-                }}
-            />
+            <FormControl variant="outlined">
+                <InputLabel id="customer-label">Customer</InputLabel>
+                <Select
+                    labelId="customer-label"
+                    label="Customer"
+                    value={customer}
+                    onChange={handleCustomerChange}
+                >
+                    <MenuItem value={"Standard"}>Standard</MenuItem>
+                    <MenuItem value={"Premium"}>Premium</MenuItem>
+                </Select>
+            </FormControl>
 
             <FormControl variant="outlined">
                 <InputLabel id="priority-label">Priority</InputLabel>
