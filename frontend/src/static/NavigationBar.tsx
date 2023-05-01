@@ -27,6 +27,7 @@ export default function NavigationBar() {
                     { text: "View Tickets", link: "/menu" },
                     { text: "Archived Tickets", link: "/archives" },
                     { text: "Create Ticket", link: "/add" },
+                    { text: "Login", link: "/login" },
                 ].map((item, index) => (
                     <ListItem button key={index} component={NavLink} to={item.link}>
                         <ListItemText primary={item.text} />
