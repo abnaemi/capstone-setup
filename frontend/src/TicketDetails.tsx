@@ -65,7 +65,13 @@ export default function TicketDetail() {
                                 <Typography>Title: {ticket.title}</Typography>
                                 <Typography>Name: {ticket.name}</Typography>
                                 <Typography>Phone: {ticket.phone}</Typography>
-                                <Typography>Email: {ticket.email}</Typography>
+                                <Typography>
+                                    Email:{" "}
+                                    <a href={`mailto:${ticket.email}`} target="_blank" rel="noopener noreferrer">
+                                        {ticket.email}
+                                    </a>
+                                </Typography>
+
                                 <Typography>Customer: {ticket.customer}</Typography>
                                 <Typography>Priority: {ticket.prio}</Typography>
                                 <Divider sx={{ my: 2 }} />
