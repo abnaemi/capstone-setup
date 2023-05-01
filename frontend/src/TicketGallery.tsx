@@ -13,7 +13,9 @@ type Props = {
     updateTicket: (ticket: Ticket) => void;
     deleteTicket: (id: string) => void;
     refreshTickets: () => void;
+    onLogout: () => Promise<void>;
 };
+
 
 
 export default function TicketGallery(props: Props) {
@@ -160,6 +162,14 @@ export default function TicketGallery(props: Props) {
                 sx={{ marginLeft: 2 }}
             >
                 Refresh Tickets
+            </Button>
+            <Button
+                variant="contained"
+                color="error"
+                onClick={props.onLogout}
+                sx={{ marginLeft: 2 }}
+            >
+                Logout
             </Button>
 
 

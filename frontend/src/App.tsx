@@ -46,7 +46,9 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
+                                    onLogout={logout}
                                 />
+
 
                             }
                         />
@@ -59,7 +61,9 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
+                                    onLogout={logout}
                                 />
+
 
                             }
                         />
