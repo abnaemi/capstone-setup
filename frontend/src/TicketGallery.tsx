@@ -1,13 +1,13 @@
-import { Grid, Typography,Pagination } from "@mui/material";
+import { Grid, Typography, Pagination } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import React from "react";
+import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import TicketStatusGraph from "./TicketStatusGraph";
 
 type Props = {
     tickets: Ticket[];
-
     updateTicket: (ticket: Ticket) => void;
-
     deleteTicket: (id: string) => void;
 };
 
@@ -25,6 +25,7 @@ export default function TicketGallery(props: Props) {
     const [openPage, setOpenPage] = React.useState(1);
     const [inProgressPage, setInProgressPage] = React.useState(1);
     const [donePage, setDonePage] = React.useState(1);
+    const [openModal, setOpenModal] = React.useState(false);
 
     const ticketsPerPage = 10;
 
@@ -38,6 +39,14 @@ export default function TicketGallery(props: Props) {
 
     const handleDonePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setDonePage(value);
+    };
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
     };
 
     const renderGridHeaders = (sectionTitle: string) => (
@@ -65,12 +74,22 @@ export default function TicketGallery(props: Props) {
         </Grid>
     );
 
-
-
-
-
     return (
         <div>
+            <Button variant="contained" color="primary" onClick={handleOpenModal}>
+                Show Ticket Status Graph
+            </Button>
+            <Dialog
+                open={openModal}
+                onClose={handleCloseModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Status Graph</DialogTitle>
+                <DialogContent>
+                    <TicketStatusGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
             <div className="tickets">
                 {renderGridHeaders("Open Tickets:")}
                 {openTickets

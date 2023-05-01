@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
 
+
+
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
     const { user, login, logout } = useUser(loadAllTickets);
