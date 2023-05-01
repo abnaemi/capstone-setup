@@ -1,6 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography,Pagination } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
+import React from "react";
 
 type Props = {
     tickets: Ticket[];
@@ -20,6 +21,24 @@ export default function TicketGallery(props: Props) {
     const doneTickets: Ticket[] = props.tickets.filter(
         (ticket) => ticket.status === "DONE"
     );
+
+    const [openPage, setOpenPage] = React.useState(1);
+    const [inProgressPage, setInProgressPage] = React.useState(1);
+    const [donePage, setDonePage] = React.useState(1);
+
+    const ticketsPerPage = 10;
+
+    const handleOpenPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setOpenPage(value);
+    };
+
+    const handleInProgressPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setInProgressPage(value);
+    };
+
+    const handleDonePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setDonePage(value);
+    };
 
     const renderGridHeaders = (sectionTitle: string) => (
         <Grid container spacing={2} sx={{ borderBottom: '1px solid #e0e0e0', paddingBottom: '-10px' }}>
@@ -54,21 +73,48 @@ export default function TicketGallery(props: Props) {
         <div>
             <div className="tickets">
                 {renderGridHeaders("Open Tickets:")}
-                {openTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
-                ))}
+                {openTickets
+                    .slice((openPage - 1) * ticketsPerPage, openPage * ticketsPerPage)
+                    .map((ticket) => (
+                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                    ))}
+                <Pagination
+                    count={Math.ceil(openTickets.length / ticketsPerPage)}
+                    page={openPage}
+                    onChange={handleOpenPageChange}
+                    color="primary"
+                    sx={{ marginTop: 2, marginBottom: 2 }}
+                />
             </div>
             <div className="tickets">
                 {renderGridHeaders("In Progress Tickets:")}
-                {inProgressTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
-                ))}
+                {inProgressTickets
+                    .slice((inProgressPage - 1) * ticketsPerPage, inProgressPage * ticketsPerPage)
+                    .map((ticket) => (
+                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                    ))}
+                <Pagination
+                    count={Math.ceil(inProgressTickets.length / ticketsPerPage)}
+                    page={inProgressPage}
+                    onChange={handleInProgressPageChange}
+                    color="primary"
+                    sx={{ marginTop: 2, marginBottom: 2 }}
+                />
             </div>
             <div className="tickets">
                 {renderGridHeaders("Done Tickets:")}
-                {doneTickets.map((ticket) => (
-                    <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
-                ))}
+                {doneTickets
+                    .slice((donePage - 1) * ticketsPerPage, donePage * ticketsPerPage)
+                    .map((ticket) => (
+                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                    ))}
+                <Pagination
+                    count={Math.ceil(doneTickets.length / ticketsPerPage)}
+                    page={donePage}
+                    onChange={handleDonePageChange}
+                    color="primary"
+                    sx={{ marginTop: 2, marginBottom: 2 }}
+                />
             </div>
         </div>
     );
