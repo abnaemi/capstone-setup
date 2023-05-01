@@ -4,6 +4,8 @@ import TicketCard from "./TicketCard";
 import React from "react";
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import TicketStatusGraph from "./TicketStatusGraph";
+import TicketPriorityGraph from "./TicketPrioGraph";
+
 
 type Props = {
     tickets: Ticket[];
@@ -49,6 +51,17 @@ export default function TicketGallery(props: Props) {
         setOpenModal(false);
     };
 
+    const [openPriorityModal, setOpenPriorityModal] = React.useState(false);
+
+    const handleOpenPriorityModal = () => {
+        setOpenPriorityModal(true);
+    };
+
+    const handleClosePriorityModal = () => {
+        setOpenPriorityModal(false);
+    };
+
+
     const renderGridHeaders = (sectionTitle: string) => (
         <Grid container spacing={2} sx={{ borderBottom: '1px solid #e0e0e0', paddingBottom: '-10px' }}>
             <Grid item xs={12}>
@@ -90,6 +103,23 @@ export default function TicketGallery(props: Props) {
                     <TicketStatusGraph tickets={props.tickets} />
                 </DialogContent>
             </Dialog>
+
+            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2 }}>
+                Show Ticket Priority Graph
+            </Button>
+            <Dialog
+                open={openPriorityModal}
+                onClose={handleClosePriorityModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Priority Graph</DialogTitle>
+                <DialogContent>
+                    <TicketPriorityGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
+
+
             <div className="tickets">
                 {renderGridHeaders("Open Tickets:")}
                 {openTickets
