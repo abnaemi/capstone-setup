@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MongoUserIntegrationTest {
+ class MongoUserIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class MongoUserDetailsServiceTest {
+class MongoServiceTest {
 
     @Mock
     private MongoUserRepository mongoUserRepository;
