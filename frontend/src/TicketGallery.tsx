@@ -1,8 +1,7 @@
-import { Grid, Typography, Pagination } from "@mui/material";
+import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import React from "react";
-import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
 import TicketCustomerGraph from "./TicketCustomerGraph";
