@@ -1,4 +1,4 @@
-package de.neuefische.backend.controller;
+package de.neuefische.backend.mongouser;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
