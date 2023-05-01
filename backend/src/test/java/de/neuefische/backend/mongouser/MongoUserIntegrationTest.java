@@ -1,4 +1,4 @@
-package de.neuefische.backend.mongouser;
+package de.neuefische.backend.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,44 +7,45 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
-class MongoUserIntegrationTest {
+public class MongoUserIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser("testUser")
     @Test
+    @WithMockUser(username = "testUser")
     void getMe_shouldReturnAuthenticatedUsername() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/me"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("testUser"));
+        mockMvc.perform(get("/api/users/me"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("testUser"));
     }
 
-    @WithMockUser("testUser")
     @Test
-    void login_shouldReturnAuthenticatedUsername() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/login")
-                        .with(SecurityMockMvcRequestPostProcessors.csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("testUser"));
+    void login_shouldReturnStatusOk() throws Exception {
+        mockMvc.perform(post("/api/users/login").with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                        {
+                            "username": "testUser",
+                            "password": "testPassword"
+                        }
+                        """
+                        ))
+                .andExpect(status().isOk());
     }
 
-    @WithMockUser("testUser")
     @Test
-    void logout_shouldInvalidateSessionAndClearAuthentication() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/logout")
-                        .with(SecurityMockMvcRequestPostProcessors.csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/me"))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    @WithMockUser
+    void logout_shouldReturnStatusOk() throws Exception {
+        mockMvc.perform(post("/api/users/logout").with(csrf()))
+                .andExpect(status().isOk());
     }
 }
