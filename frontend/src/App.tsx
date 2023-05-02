@@ -18,7 +18,7 @@ function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } =
         useTickets();
 
-    const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
+    const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
 
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
 

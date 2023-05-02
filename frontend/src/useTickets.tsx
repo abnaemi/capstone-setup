@@ -4,9 +4,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function useTickets() {
+
+
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
-    const loadAllTickets = useCallback(() => {
+    useEffect(() => {
+        loadAllTickets()}, [])
+
+
+    function loadAllTickets() {
         axios
             .get("/api/tickets")
             .then((response) => {
@@ -17,11 +23,8 @@ export default function useTickets() {
                 console.error(error);
                 toast.error("Failed to load tickets.");
             });
-    }, []);
+    }
 
-    useEffect(() => {
-        loadAllTickets();
-    }, [loadAllTickets]);
 
 
     function addTicket(newTicket: NewTicket) {
