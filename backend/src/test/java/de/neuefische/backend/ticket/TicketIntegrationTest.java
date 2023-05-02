@@ -94,7 +94,7 @@ class TicketIntegrationTest {
                                 }
                                 """
                         ))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().json(
                         """
                                 {
