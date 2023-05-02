@@ -5,16 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
 class TicketIntegrationTest {
@@ -32,8 +34,9 @@ class TicketIntegrationTest {
 
     @DirtiesContext
     @Test
+    @WithMockUser
     void getAll_ReturnEmptyListBcsNoTicketsExist() throws Exception {
-        mockMvc.perform(get("/api/tickets"))
+        mockMvc.perform(get("/api/tickets").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
@@ -42,14 +45,14 @@ class TicketIntegrationTest {
                 ));
     }
 
-
+    @WithMockUser
     @DirtiesContext
     @Test
     void getAll_shouldReturnAllTickets() throws Exception {
         ticketRepository.save(ticketone);
 
 
-        mockMvc.perform(get("/api/tickets"))
+        mockMvc.perform(get("/api/tickets").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
@@ -70,11 +73,11 @@ class TicketIntegrationTest {
                     """
                 ));
     }
-
+    @WithMockUser
     @Test
     @DirtiesContext
     void addTicket_shouldReturnTicket() throws Exception {
-        mockMvc.perform(post("/api/tickets")
+        mockMvc.perform(post("/api/tickets").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -109,7 +112,7 @@ class TicketIntegrationTest {
                                 """
                 ));
     }
-
+    @WithMockUser
     @Test
     @DirtiesContext
     void updateTicket_shouldReturnUpdatedTicket() throws Exception {
@@ -119,7 +122,7 @@ class TicketIntegrationTest {
 
         // When
         Ticket updatedTicket = new Ticket("1","Tom","Updated Title","Updated Content","123","email","customer","999",new ArrayList<>(), TicketStatus.IN_PROGRESS);
-        mockMvc.perform(put("/api/tickets/1/update")
+        mockMvc.perform(put("/api/tickets/1/update").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                             {
@@ -155,7 +158,7 @@ class TicketIntegrationTest {
         // Then
         assertEquals(updatedTicket, ticketRepository.findById("1").get());
     }
-
+    @WithMockUser
     @Test
     @DirtiesContext
     void updateTicket_shouldThrowExceptionIfIdsDoNotMatch() throws Exception {
@@ -164,7 +167,7 @@ class TicketIntegrationTest {
         ticketRepository.save(ticketone);
 
         // When
-        mockMvc.perform(put("/api/tickets/1/update")
+        mockMvc.perform(put("/api/tickets/1/update").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                         {
@@ -189,7 +192,7 @@ class TicketIntegrationTest {
         assertEquals(ticketone, ticketRepository.findById("1").get());
     }
 
-
+    @WithMockUser
     @Test
     @DirtiesContext
     void deleteTicket_shouldDeleteTicket() throws Exception {
@@ -198,13 +201,13 @@ class TicketIntegrationTest {
         ticketRepository.save(ticketToDelete);
 
         // When
-        mockMvc.perform(delete("/api/tickets/1"))
+        mockMvc.perform(delete("/api/tickets/1").with(csrf()))
                 .andExpect(status().isOk());
 
         // Then
         assertTrue(ticketRepository.findById("1").isEmpty());
     }
-
+    @WithMockUser
     @DirtiesContext
     @Test
     void getByID_shouldReturnTicketByID() throws Exception {
@@ -213,7 +216,7 @@ class TicketIntegrationTest {
         ticketRepository.save(ticket);
 
         // When/Then
-        mockMvc.perform(get("/api/tickets/1"))
+        mockMvc.perform(get("/api/tickets/1").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                 {

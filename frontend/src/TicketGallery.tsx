@@ -1,15 +1,22 @@
-import { Grid, Typography,Pagination } from "@mui/material";
+import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import React from "react";
+import TicketStatusGraph from "./TicketStatusGraph";
+import TicketPriorityGraph from "./TicketPrioGraph";
+import TicketCustomerGraph from "./TicketCustomerGraph";
+
+
 
 type Props = {
     tickets: Ticket[];
-
     updateTicket: (ticket: Ticket) => void;
-
     deleteTicket: (id: string) => void;
+    refreshTickets: () => void;
+    onLogout: () => Promise<void>;
 };
+
+
 
 export default function TicketGallery(props: Props) {
     const openTickets: Ticket[] = props.tickets.filter(
@@ -25,6 +32,7 @@ export default function TicketGallery(props: Props) {
     const [openPage, setOpenPage] = React.useState(1);
     const [inProgressPage, setInProgressPage] = React.useState(1);
     const [donePage, setDonePage] = React.useState(1);
+    const [openModal, setOpenModal] = React.useState(false);
 
     const ticketsPerPage = 10;
 
@@ -39,6 +47,39 @@ export default function TicketGallery(props: Props) {
     const handleDonePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setDonePage(value);
     };
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
+
+    const [openPriorityModal, setOpenPriorityModal] = React.useState(false);
+
+    const handleOpenPriorityModal = () => {
+        setOpenPriorityModal(true);
+    };
+
+    const handleClosePriorityModal = () => {
+        setOpenPriorityModal(false);
+    };
+
+
+    const [openCustomerModal, setOpenCustomerModal] = React.useState(false);
+
+    const handleOpenCustomerModal = () => {
+        setOpenCustomerModal(true);
+    };
+
+    const handleCloseCustomerModal = () => {
+        setOpenCustomerModal(false);
+    };
+
+
+
+
 
     const renderGridHeaders = (sectionTitle: string) => (
         <Grid container spacing={2} sx={{ borderBottom: '1px solid #e0e0e0', paddingBottom: '-10px' }}>
@@ -65,12 +106,73 @@ export default function TicketGallery(props: Props) {
         </Grid>
     );
 
-
-
-
-
     return (
         <div>
+            <Button variant="contained" color="primary" onClick={handleOpenModal}>
+                Show Ticket Status Graph
+            </Button>
+            <Dialog
+                open={openModal}
+                onClose={handleCloseModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Status Graph</DialogTitle>
+                <DialogContent>
+                    <TicketStatusGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
+
+
+            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2 }}>
+                Show Ticket Customer Graph
+            </Button>
+            <Dialog
+                open={openCustomerModal}
+                onClose={handleCloseCustomerModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Customer Graph</DialogTitle>
+                <DialogContent>
+                    <TicketCustomerGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
+
+
+            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2 }}>
+                Show Ticket Priority Graph
+            </Button>
+            <Dialog
+                open={openPriorityModal}
+                onClose={handleClosePriorityModal}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Ticket Priority Graph</DialogTitle>
+                <DialogContent>
+                    <TicketPriorityGraph tickets={props.tickets} />
+                </DialogContent>
+            </Dialog>
+
+            <Button
+                variant="contained"
+
+                onClick={props.refreshTickets}
+                sx={{ marginLeft: 2 }}
+            >
+                Refresh Tickets
+            </Button>
+            <Button
+                variant="contained"
+                color="error"
+                onClick={props.onLogout}
+                sx={{ marginLeft: 2 }}
+            >
+                Logout
+            </Button>
+
+
             <div className="tickets">
                 {renderGridHeaders("Open Tickets:")}
                 {openTickets
