@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {NewTicket, Ticket} from "./model/Ticket";
 import axios from "axios";
 import {toast} from "react-toastify";
@@ -11,7 +11,7 @@ export default  function useTickets() {
         loadAllTickets()
     },[])
 
-    function loadAllTickets() {
+    const loadAllTickets = useCallback(() => {
         axios
             .get("/api/tickets")
             .then((response) => {
@@ -22,7 +22,11 @@ export default  function useTickets() {
                 console.error(error);
                 toast.error("Failed to load tickets.");
             });
-    }
+    }, []);
+
+    useEffect(() => {
+        loadAllTickets();
+    }, [loadAllTickets]);
 
 
     function addTicket(newTicket: NewTicket) {
