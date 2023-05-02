@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import Header from "./static/Header";
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,6 +21,13 @@ function App() {
     const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
 
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
+    useEffect(() => {
+        if (user) {
+            console.log("loadAllTickets called from useEffect");
+
+            loadAllTickets();
+        }
+    }, [user]);
 
     function handleLogout() {
         return new Promise<void>((resolve) => {

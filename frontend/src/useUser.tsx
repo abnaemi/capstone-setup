@@ -8,14 +8,14 @@ export default function useUser(loadAllTickets: () => void) {
 
     useEffect(() => {
         function checkLoggedInUser() {
-            axios.get("/api/users/me")
-                .then(response => {
+            axios
+                .get("/api/users/me")
+                .then((response) => {
                     if (response.data && response.data !== "anonymousUser") {
                         setUser(response.data);
-                        loadAllTickets();
                     }
                 })
-                .catch(error => {
+                .catch((error) => {
                     toast.error("Error checking logged-in user:");
                 })
                 .finally(() => {
@@ -24,9 +24,11 @@ export default function useUser(loadAllTickets: () => void) {
         }
 
         checkLoggedInUser();
-    }, [loadAllTickets]);
+    }, []);
+
 
     function login(username: string, password: string): Promise<void> {
+        console.log("Login function called");
         return axios.post("/api/users/login", undefined, {
             auth: { username, password },
         })

@@ -5,14 +5,11 @@ import { toast } from "react-toastify";
 
 export default function useTickets() {
 
-
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
-    useEffect(() => {
-        loadAllTickets()}, [])
-
-
     function loadAllTickets() {
+        console.log("loadAllTickets function executed");
+
         axios
             .get("/api/tickets")
             .then((response) => {
