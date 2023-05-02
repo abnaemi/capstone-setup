@@ -1,7 +1,7 @@
 import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
 import TicketCustomerGraph from "./TicketCustomerGraph";
@@ -29,22 +29,22 @@ export default function TicketGallery(props: Props) {
         (ticket) => ticket.status === "DONE"
     );
 
-    const [openPage, setOpenPage] = React.useState(1);
-    const [inProgressPage, setInProgressPage] = React.useState(1);
-    const [donePage, setDonePage] = React.useState(1);
-    const [openModal, setOpenModal] = React.useState(false);
+    const [openPage, setOpenPage] = useState(1);
+    const [inProgressPage, setInProgressPage] = useState(1);
+    const [donePage, setDonePage] = useState(1);
+    const [openModal, setOpenModal] = useState(false);
 
     const ticketsPerPage = 10;
 
-    const handleOpenPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleOpenPageChange = (event: ChangeEvent<unknown>, value: number) => {
         setOpenPage(value);
     };
 
-    const handleInProgressPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleInProgressPageChange = (event: ChangeEvent<unknown>, value: number) => {
         setInProgressPage(value);
     };
 
-    const handleDonePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleDonePageChange = (event: ChangeEvent<unknown>, value: number) => {
         setDonePage(value);
     };
 
@@ -56,7 +56,7 @@ export default function TicketGallery(props: Props) {
         setOpenModal(false);
     };
 
-    const [openPriorityModal, setOpenPriorityModal] = React.useState(false);
+    const [openPriorityModal, setOpenPriorityModal] = useState(false);
 
     const handleOpenPriorityModal = () => {
         setOpenPriorityModal(true);
@@ -67,7 +67,7 @@ export default function TicketGallery(props: Props) {
     };
 
 
-    const [openCustomerModal, setOpenCustomerModal] = React.useState(false);
+    const [openCustomerModal, setOpenCustomerModal] = useState(false);
 
     const handleOpenCustomerModal = () => {
         setOpenCustomerModal(true);

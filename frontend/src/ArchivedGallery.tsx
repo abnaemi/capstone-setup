@@ -2,7 +2,7 @@ import { Grid, InputAdornment, TextField, Typography } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 
 type Props = {
     tickets: Ticket[];
@@ -11,12 +11,12 @@ type Props = {
 };
 
 export default function TicketGallery(props: Props) {
-    const [searchTerm, setSearchTerm] = React.useState("");
+    const [searchTerm, setSearchTerm] = useState("");
     const archivedTickets: Ticket[] = props.tickets.filter(
         (ticket) => ticket.status === "ARCHIVED"
     );
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 

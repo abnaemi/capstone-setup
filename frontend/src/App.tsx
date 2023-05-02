@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './App.css';
 import Header from "./static/Header";
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +13,6 @@ import useUser from "./useUser";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
-import { useCallback } from 'react';
 
 
 function App() {
@@ -22,8 +21,21 @@ function App() {
     const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
 
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
-    async function handleLogout() {
-        await logout();
+
+    function handleLogout() {
+        return new Promise<void>((resolve) => {
+            logout();
+            resolve();
+        });
+    }
+
+    function handleLogin(username: string, password: string) {
+        return new Promise<void>((resolve) => {
+            login(username, password).then(() => {
+                resolve();
+            });
+        });
+
     }
 
     return (
@@ -33,7 +45,7 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path="/login" element={<LoginPage onLogin={login} />} />
+                    <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
 
                     <Route element={<ProtectedRoutes user={user} isLoading={isLoading} />}>
                         <Route element={<Navigate to='/tickets' />} />
@@ -47,7 +59,7 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
-                                    onLogout={logout}
+                                    onLogout={handleLogout}
                                 />
                             }
                         />
@@ -60,7 +72,7 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
-                                    onLogout={logout}
+                                    onLogout={handleLogout}
                                 />
                             }
                         />
