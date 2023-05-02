@@ -23,7 +23,9 @@ function App() {
     async function handleLogout() {
         await logout();
     }
-
+    const renderLoginPage = !user && (
+        <Route path='/login' element={<LoginPage onLogin={login} user={user} />} />
+    );
 
     return (
         <BrowserRouter>
@@ -32,7 +34,7 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path='/login' element={<LoginPage onLogin={login} />} />
+                    {renderLoginPage}
 
                     <Route element={<ProtectedRoutes user={user} />}>
                         <Route element={<Navigate to='/tickets' />} />

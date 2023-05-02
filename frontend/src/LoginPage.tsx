@@ -1,9 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField, Box } from "@mui/material";
 
 type Props = {
     onLogin: (username: string, password: string) => Promise<void>;
+    user: string | undefined;
 };
 
 export default function LoginPage(props: Props) {
@@ -11,6 +12,12 @@ export default function LoginPage(props: Props) {
     const [password, setPassword] = useState<string>("");
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (props.user) {
+            navigate("/menu");
+        }
+    }, [props.user, navigate]);
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();

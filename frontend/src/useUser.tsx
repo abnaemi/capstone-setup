@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function useUser(loadAllTickets: () => void) {
     const [user, setUser] = useState<string>();
+
+    async function checkLoggedIn() {
+        try {
+            const response = await axios.get("/api/users/me");
+            setUser(response.data);
+        } catch (error) {
+            console.error("Error checking logged-in status:", error);
+        }
+    }
 
     async function login(username: string, password: string) {
         try {
@@ -28,6 +37,10 @@ export default function useUser(loadAllTickets: () => void) {
             console.error("Logout failed:", error);
         }
     }
+
+    useEffect(() => {
+        checkLoggedIn();
+    }, []);
 
     return { user, login, logout };
 }
