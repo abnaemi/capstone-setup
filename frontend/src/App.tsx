@@ -18,7 +18,7 @@ import { useCallback } from 'react';
 
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
-    const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
+    const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
     async function handleLogout() {
         await logout();

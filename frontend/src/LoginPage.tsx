@@ -39,17 +39,6 @@ export default function LoginPage(props: Props) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Box>
-            <Box marginBottom={2}>
-                <TextField
-                    sx={{ width: "50%", mt: 2 }}
-                    label="Warning"
-                    value="Please Logout with the Logout Button. Please Refresh with the Refresh Button."
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                    variant="outlined"
-                />
-            </Box>
             <Button variant="contained" color="primary" type="submit">
                 Login
             </Button>
