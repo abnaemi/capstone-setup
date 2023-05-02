@@ -1,17 +1,14 @@
-import { Outlet } from "react-router-dom";
-import { Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router-dom";
 
 type Props = {
     user?: string;
     isLoading: boolean;
 };
 
-const ProtectedRoutes = ({ user, isLoading }: Props) => {
+export default function ProtectedRoutes({ user, isLoading }: Props) {
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     return user ? <Outlet /> : <Navigate to="/login" />;
-};
-
-export default ProtectedRoutes;
+}
