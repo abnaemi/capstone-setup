@@ -1,15 +1,10 @@
-import {useCallback, useEffect, useState} from "react";
-import {NewTicket, Ticket} from "./model/Ticket";
+import { useCallback, useEffect, useState } from "react";
+import { NewTicket, Ticket } from "./model/Ticket";
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
-
-export default  function useTickets() {
-
-    const [tickets, setTickets] = useState<Ticket[]>([])
-    useEffect(()=>{
-        loadAllTickets()
-    },[])
+export default function useTickets() {
+    const [tickets, setTickets] = useState<Ticket[]>([]);
 
     const loadAllTickets = useCallback(() => {
         axios
