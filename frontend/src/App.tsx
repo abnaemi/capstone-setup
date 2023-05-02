@@ -18,7 +18,8 @@ import { useCallback } from 'react';
 
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
-    const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
     async function handleLogout() {
         await logout();
