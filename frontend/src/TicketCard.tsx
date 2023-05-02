@@ -90,7 +90,6 @@ export default function TicketCard(props: Props) {
                                     </Button>
                                 )}
                                 <Button variant="contained" size="small" startIcon={<InfoIcon />} onClick={() => { navigate("/product/details/" + props.ticket.id) }}>
-                                    Details
                                 </Button>
                             </ButtonGroup>
                         </Grid>
