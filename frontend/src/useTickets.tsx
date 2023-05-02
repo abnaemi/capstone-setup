@@ -12,9 +12,16 @@ export default  function useTickets() {
     },[])
 
     function loadAllTickets() {
-        axios.get("/api/tickets")
-            .then((response) => { setTickets(response.data) })
-            .catch((error) => { console.error(error) })
+        axios
+            .get("/api/tickets")
+            .then((response) => {
+                setTickets(response.data);
+                toast.success("Tickets loaded!");
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error("Failed to load tickets.");
+            });
     }
 
 

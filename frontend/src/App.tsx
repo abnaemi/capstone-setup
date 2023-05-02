@@ -13,11 +13,13 @@ import useUser from "./useUser";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
+import { useCallback } from 'react';
+
 
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
-    const { user, login, logout, isLoading } = useUser(loadAllTickets);
-
+    const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
+    const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
     async function handleLogout() {
         await logout();
     }
