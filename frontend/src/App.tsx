@@ -14,16 +14,13 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
 
-
-
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
-    const { user, login, logout } = useUser(loadAllTickets);
+    const { user, login, logout, isLoading } = useUser(loadAllTickets);
 
     async function handleLogout() {
         await logout();
     }
-
 
     return (
         <BrowserRouter>
@@ -32,9 +29,9 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path='/login' element={<LoginPage onLogin={login} />} />
+                    <Route path="/login" element={<LoginPage onLogin={login} />} />
 
-                    <Route element={<ProtectedRoutes user={user} />}>
+                    <Route element={<ProtectedRoutes user={user} isLoading={isLoading} />}>
                         <Route element={<Navigate to='/tickets' />} />
                         <Route path='/logout' element={<LogoutPage onLogout={handleLogout} />} />
 
@@ -48,8 +45,6 @@ function App() {
                                     refreshTickets={loadAllTickets}
                                     onLogout={logout}
                                 />
-
-
                             }
                         />
 
@@ -63,8 +58,6 @@ function App() {
                                     refreshTickets={loadAllTickets}
                                     onLogout={logout}
                                 />
-
-
                             }
                         />
 
