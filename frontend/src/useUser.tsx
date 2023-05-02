@@ -26,7 +26,6 @@ export default function useUser(loadAllTickets: () => void) {
         checkLoggedInUser();
     }, []);
 
-
     function login(username: string, password: string): Promise<void> {
         console.log("Login function called");
         return axios.post("/api/users/login", undefined, {
@@ -34,7 +33,6 @@ export default function useUser(loadAllTickets: () => void) {
         })
             .then(response => {
                 setUser(response.data);
-                loadAllTickets();
                 toast.success("Login Successful!");
             })
             .catch(error => {

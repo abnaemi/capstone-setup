@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {  useState } from "react";
 import { NewTicket, Ticket } from "./model/Ticket";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ export default function useTickets() {
 
     function loadAllTickets() {
         console.log("loadAllTickets function executed");
-
+        console.trace();
         axios
             .get("/api/tickets")
             .then((response) => {
