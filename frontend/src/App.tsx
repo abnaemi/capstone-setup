@@ -37,12 +37,11 @@ function App() {
     }
 
     function handleLogin(username: string, password: string) {
-        return new Promise<void>((resolve) => {
-            login(username, password).then(() => {
-                resolve();
-            });
+        return login(username, password).catch((error) => {
+            console.error('An error occurred during login:', error);
         });
     }
+
 
     return (
         <BrowserRouter>
