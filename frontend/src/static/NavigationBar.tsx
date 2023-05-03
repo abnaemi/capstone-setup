@@ -27,7 +27,9 @@ export default function NavigationBar() {
                     { text: "View Tickets", link: "/menu" },
                     { text: "Archived Tickets", link: "/archives" },
                     { text: "Create Ticket", link: "/add" },
+                    { text: "Login", link: "/login" },
                     { text: "Logout", link: "/logout" },
+                    { text: "Report a Problem", link: "/report" },
 
 
 
