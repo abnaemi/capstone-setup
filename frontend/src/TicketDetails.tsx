@@ -9,6 +9,14 @@ export default function TicketDetail() {
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [commentText, setCommentText] = useState("");
 
+    const [title, setTitle] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+
+
+
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -22,11 +30,39 @@ export default function TicketDetail() {
             .get("/api/tickets/" + id)
             .then((response) => {
                 setTicket(response.data);
+                setTitle(response.data.title);
+                setName(response.data.name);
+                setPhone(response.data.phone);
+                setEmail(response.data.email);
+                setContent(response.data.content);
             })
             .catch((error) => {
                 toast.error("Ticket not found");
             });
     }
+
+    function updateTicket() {
+        const updatedTicket = {
+            ...(ticket as Ticket),
+            title: title,
+            name: name,
+            phone: phone,
+            email: email,
+            content: content
+        };
+
+        axios
+            .put(`/api/tickets/${ticket?.id}`, updatedTicket)
+            .then((response) => {
+                setTicket(response.data);
+                toast.success("Ticket updated successfully!");
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error("Failed to update ticket.");
+            });
+    }
+
 
     function handleCommentSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -115,6 +151,62 @@ export default function TicketDetail() {
                     </CardActions>
                 </Card>
             </Grid>
+
+            <Grid item xs={12}>
+                <TextField
+                    label="Title"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                />
+                <TextField
+                    label="Name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                />
+                <TextField
+                    label="Phone"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                />
+                <TextField
+                    label="Email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                />
+                <TextField
+                    label="Content"
+                    value={content}
+                    onChange={(event) => setContent(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={updateTicket}
+                    style={{ marginTop: "1rem" }}
+                >
+                    Save
+                </Button>
+            </Grid>
+
+
+
         </Grid>
     );
 }
