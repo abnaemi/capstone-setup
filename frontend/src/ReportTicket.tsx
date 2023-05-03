@@ -118,9 +118,11 @@ export default function ReportTicket(props: Props) {
                     variant="outlined"
                     startIcon={<SaveIcon />}
                     onClick={onSaveTicket}
+                    disabled={!title || !name || !phone || !email || !content}
                 >
                     Save
                 </Button>
+
             </Box>
 
 
