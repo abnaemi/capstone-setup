@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import Header from "./static/Header";
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import TicketGallery from "./TicketGallery";
 import ArchivedGallery from "./ArchivedGallery";
 import AddTicket from "./AddTicket";
@@ -13,31 +13,47 @@ import useUser from "./useUser";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
-import { useCallback } from 'react';
-
 
 function App() {
-    const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } = useTickets();
+    const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } =
+        useTickets();
 
     const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
 
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
-    async function handleLogout() {
-        await logout();
+    useEffect(() => {
+        if (user) {
+
+            loadAllTickets();
+        }
+    }, [user,loadAllTickets]);
+
+    function handleLogout() {
+        return new Promise<void>((resolve) => {
+            logout();
+            resolve();
+        });
     }
+
+    function handleLogin(username: string, password: string) {
+        return login(username, password).catch((error) => {
+            console.error('An error occurred during login:', error);
+        });
+    }
+
 
     return (
         <BrowserRouter>
             <div className="App">
-                <ToastContainer autoClose={3000} />
+                <ToastContainer autoClose={500} />
                 <Header />
 
                 <Routes>
-                    <Route path="/login" element={<LoginPage onLogin={login} />} />
+                    <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
 
                     <Route element={<ProtectedRoutes user={user} isLoading={isLoading} />}>
-                        <Route element={<Navigate to='/tickets' />} />
-                        <Route path='/logout' element={<LogoutPage onLogout={handleLogout} />} />
+                        <Route element={<Navigate to="/tickets" />} />
+                        <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
 
                         <Route
                             path={"/"}
@@ -47,7 +63,7 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
-                                    onLogout={logout}
+                                    onLogout={handleLogout}
                                 />
                             }
                         />
@@ -60,7 +76,7 @@ function App() {
                                     updateTicket={updateTicket}
                                     deleteTicket={deleteTicket}
                                     refreshTickets={loadAllTickets}
-                                    onLogout={logout}
+                                    onLogout={handleLogout}
                                 />
                             }
                         />
@@ -83,4 +99,5 @@ function App() {
         </BrowserRouter>
     );
 }
+
 export default App;

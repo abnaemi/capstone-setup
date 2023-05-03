@@ -94,7 +94,7 @@ class TicketIntegrationTest {
                                 }
                                 """
                         ))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().json(
                         """
                                 {
@@ -202,7 +202,7 @@ class TicketIntegrationTest {
 
         // When
         mockMvc.perform(delete("/api/tickets/1").with(csrf()))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         // Then
         assertTrue(ticketRepository.findById("1").isEmpty());

@@ -1,8 +1,9 @@
-import { Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button, Box, ButtonGroup } from '@mui/material';
 import { Ticket } from "./model/Ticket";
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -12,8 +13,6 @@ type Props = {
 }
 
 export default function TicketCard(props: Props) {
-
-
     const navigate = useNavigate()
     const nextStatus: { OPEN: "IN_PROGRESS", IN_PROGRESS: "DONE", DONE: "ARCHIVED", ARCHIVED: "ARCHIVED" } = {
         "OPEN": "IN_PROGRESS",
@@ -42,6 +41,7 @@ export default function TicketCard(props: Props) {
         const ticketToUpdate: Ticket = { ...props.ticket, status: previousStatus[props.ticket.status] }
         props.updateTicket(ticketToUpdate)
     }
+
     return (
         <Box marginBottom={-2}>
             <Card>
@@ -73,24 +73,25 @@ export default function TicketCard(props: Props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sm={2}>
-                            {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
-                                <Button variant="contained" size="small" onClick={changeStatusPrevious}>
-                                    <KeyboardArrowLeftIcon />
+                            <ButtonGroup fullWidth>
+                                {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
+                                    <Button variant="contained" size="small" onClick={changeStatusPrevious}>
+                                        <KeyboardArrowLeftIcon />
+                                    </Button>
+                                )}
+                                {props.ticket.status !== 'ARCHIVED' && (
+                                    <Button variant="contained" size="small" onClick={changeStatusClick}>
+                                        <KeyboardArrowRightIcon />
+                                    </Button>
+                                )}
+                                {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
+                                    <Button variant="contained" size="small" onClick={deleteClick}>
+                                        <DeleteIcon />
+                                    </Button>
+                                )}
+                                <Button variant="contained" size="small" startIcon={<InfoIcon />} onClick={() => { navigate("/product/details/" + props.ticket.id) }}>
                                 </Button>
-                            )}
-
-                            {props.ticket.status !== 'ARCHIVED' && (
-                                <Button variant="contained" size="small" onClick={changeStatusClick}>
-                                    <KeyboardArrowRightIcon />
-                                </Button>
-                            )}
-
-                            {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
-                                <Button variant="contained" size="small" onClick={deleteClick}>
-                                    <DeleteIcon />
-                                </Button>)}
-
-                            <Button variant="contained" size="small" onClick={() => { navigate("/product/details/" + props.ticket.id) }}>Details</Button>
+                            </ButtonGroup>
                         </Grid>
                     </Grid>
                 </CardContent>
@@ -98,3 +99,4 @@ export default function TicketCard(props: Props) {
         </Box>
     )
 }
+

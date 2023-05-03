@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Box } from "@mui/material";
+import {toast} from "react-toastify";
 
 type Props = {
     onLogout: () => Promise<void>;
@@ -18,7 +19,7 @@ export default function LogoutPage(props: Props) {
                 navigate("/login");
             })
             .catch((error) => {
-                console.error("Logout failed:", error);
+                toast.error("Logout failed:");
             })
             .finally(() => {
                 setIsLoading(false);
