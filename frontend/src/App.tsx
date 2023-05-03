@@ -18,7 +18,7 @@ function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } =
         useTickets();
 
-    const memoizedLoadAllTickets = useCallback(loadAllTickets, []);
+    const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
 
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
     useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
 
             loadAllTickets();
         }
-    }, [user]);
+    }, [user,]);
 
     function handleLogout() {
         return new Promise<void>((resolve) => {
@@ -46,7 +46,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <ToastContainer autoClose={3000} />
+                <ToastContainer autoClose={1500} />
                 <Header />
 
                 <Routes>
