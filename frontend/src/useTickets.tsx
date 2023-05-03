@@ -1,13 +1,12 @@
-import {  useState } from "react";
+import { useState, useCallback } from "react";
 import { NewTicket, Ticket } from "./model/Ticket";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function useTickets() {
-
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
-    function loadAllTickets() {
+    const loadAllTickets = useCallback(() => {
         console.log("loadAllTickets function executed");
         console.trace();
         axios
@@ -20,7 +19,7 @@ export default function useTickets() {
                 console.error(error);
                 toast.error("Failed to load tickets.");
             });
-    }
+    }, []);
 
 
 

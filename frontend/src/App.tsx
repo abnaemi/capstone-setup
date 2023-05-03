@@ -27,7 +27,7 @@ function App() {
 
             loadAllTickets();
         }
-    }, [user,]);
+    }, [user,loadAllTickets]);
 
     function handleLogout() {
         return new Promise<void>((resolve) => {
@@ -46,7 +46,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <ToastContainer autoClose={1500} />
+                <ToastContainer autoClose={1000} />
                 <Header />
 
                 <Routes>
