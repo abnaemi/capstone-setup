@@ -29,7 +29,7 @@ export default function useTickets() {
             .post("/api/tickets", newTicket)
             .then((response) => {
                 setTickets([...tickets, response.data]);
-                toast.success("Ticket created successfully!");
+                toast.success("Ticket created!");
             })
             .catch((error) => {
                 console.error(error);
@@ -47,7 +47,7 @@ export default function useTickets() {
                         currentTicket.id === ticket.id ? response.data : currentTicket
                     )
                 );
-                toast.success("Ticket updated successfully!");
+                toast.success("Ticket updated!");
             })
             .catch((error) => {
                 console.error(error);
@@ -59,7 +59,7 @@ export default function useTickets() {
             .delete('/api/tickets/' + id)
             .then(() => {
                 setTickets(tickets.filter((ticket) => ticket.id !== id));
-                toast.success("Ticket deleted successfully!");
+                toast.success("Ticket deleted!");
             })
             .catch((error) => {
                 console.error(error);
