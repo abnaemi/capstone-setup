@@ -55,7 +55,7 @@ export default function TicketDetail() {
             .put(`/api/tickets/${ticket?.id}`, updatedTicket)
             .then((response) => {
                 setTicket(response.data);
-                toast.success("Ticket updated successfully!");
+                toast.success("Ticket updated!");
             })
             .catch((error) => {
                 console.error(error);
@@ -82,7 +82,7 @@ export default function TicketDetail() {
             .then((response) => {
                 setTicket(response.data);
                 setCommentText("");
-                toast.success("Comment added successfully!");
+                toast.success("Comment added!");
             })
             .catch((error) => {
                 console.error(error);
