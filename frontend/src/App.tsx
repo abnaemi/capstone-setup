@@ -23,7 +23,6 @@ function App() {
     const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
     useEffect(() => {
         if (user) {
-            console.log("loadAllTickets called from useEffect");
 
             loadAllTickets();
         }

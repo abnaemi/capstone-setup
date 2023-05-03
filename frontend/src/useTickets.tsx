@@ -7,8 +7,6 @@ export default function useTickets() {
     const [tickets, setTickets] = useState<Ticket[]>([]);
 
     const loadAllTickets = useCallback(() => {
-        console.log("loadAllTickets function executed");
-        console.trace();
         axios
             .get("/api/tickets")
             .then((response) => {

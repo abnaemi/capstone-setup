@@ -27,7 +27,6 @@ export default function useUser(loadAllTickets: () => void) {
     }, []);
 
     function login(username: string, password: string): Promise<void> {
-        console.log("Login function called");
         return axios.post("/api/users/login", undefined, {
             auth: { username, password },
         })
