@@ -13,6 +13,7 @@ import useUser from "./useUser";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoutes from "./ProtectedRoutes";
 import LogoutPage from "./LogoutPage";
+import ReportTicket from "./ReportTicket";
 
 function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } =
@@ -49,7 +50,9 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+                    <Route path="/login" element={<LoginPage onLogin={handleLogin}  />} />
+                    <Route path="/report" element={<ReportTicket addTicket={addTicket}   />} />
+
 
                     <Route element={<ProtectedRoutes user={user} isLoading={isLoading} />}>
                         <Route element={<Navigate to="/tickets" />} />
