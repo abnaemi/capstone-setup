@@ -95,7 +95,8 @@ function App() {
                                 />
                             }
                         />
-                        <Route path={"/product/details/:id"} element={<TicketDetail />} />
+                        <Route path={"/product/details/:id"} element={<TicketDetail onTicketUpdate={loadAllTickets} />
+                        } />
                     </Route>
                 </Routes>
             </div>

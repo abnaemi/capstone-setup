@@ -5,7 +5,13 @@ import { toast } from "react-toastify";
 import { Typography, TextField, Button, Grid, Card, CardContent, CardHeader, CardActions, Divider, Paper } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 
-export default function TicketDetail() {
+
+type Props = {
+    onTicketUpdate: () => void;
+};
+
+
+export default function TicketDetail({ onTicketUpdate }: Props) {
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [commentText, setCommentText] = useState("");
 
@@ -55,7 +61,8 @@ export default function TicketDetail() {
             .put(`/api/tickets/${ticket?.id}`, updatedTicket)
             .then((response) => {
                 setTicket(response.data);
-                toast.success("Ticket updated!");
+                toast.success("Ticket updated successfully!");
+                onTicketUpdate();
             })
             .catch((error) => {
                 console.error(error);
