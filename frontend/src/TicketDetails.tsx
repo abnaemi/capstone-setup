@@ -4,6 +4,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Typography, TextField, Button, Grid, Card, CardContent, CardHeader, CardActions, Divider, Paper } from "@mui/material";
 import { Ticket } from "./model/Ticket";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 
 type Props = {
@@ -20,7 +24,8 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
     const [phone, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [content, setContent] = useState<string>("");
-
+    const [customer, setCustomer] = useState<string>("");
+    const [prio, setPrio] = useState<string>("");
 
 
     const { id } = useParams<{ id: string }>();
@@ -41,6 +46,8 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                 setPhone(response.data.phone);
                 setEmail(response.data.email);
                 setContent(response.data.content);
+                setPrio(response.data.prio);
+                setCustomer(response.data.customer);
             })
             .catch((error) => {
                 toast.error("Ticket not found");
@@ -54,7 +61,9 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
             name: name,
             phone: phone,
             email: email,
-            content: content
+            content: content,
+            prio: prio,
+            customer:customer,
         };
 
         axios
@@ -159,7 +168,7 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                 </Card>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} >
                 <TextField
                     label="Title"
                     value={title}
@@ -202,6 +211,43 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                     multiline
                     rows={4}
                 />
+                <Grid item xs={12} style={{ marginTop: '1rem' }}>
+
+                <FormControl variant="outlined" fullWidth >
+                    <InputLabel id="customer-label">Customer</InputLabel>
+                    <Select
+                        labelId="customer-label"
+                        label="Customer"
+                        fullWidth
+                        rows={4}
+                        value={customer}
+                        onChange={(event) => setCustomer(event.target.value)}
+                    >
+                        <MenuItem value={"Standard"}>Standard</MenuItem>
+                        <MenuItem value={"Premium"}>Premium</MenuItem>
+                    </Select>
+
+                </FormControl>
+                </Grid>
+
+                <Grid item xs={12} style={{ marginTop: '1rem' }}>
+
+                <FormControl  variant="outlined" fullWidth >
+                    <InputLabel  id="priority-label">Priority</InputLabel>
+                    <Select
+                        labelId="priority-label"
+                        label="Priority"
+
+                        value={prio}
+                        onChange={(event) => setPrio(event.target.value)}
+                    >
+                        <MenuItem value={"Low"}>Low</MenuItem>
+                        <MenuItem value={"Medium"}>Medium</MenuItem>
+                        <MenuItem value={"High"}>High</MenuItem>
+                    </Select>
+                </FormControl>
+                </Grid>
+
                 <Button
                     variant="contained"
                     color="primary"

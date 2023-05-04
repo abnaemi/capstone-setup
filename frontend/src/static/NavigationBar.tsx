@@ -1,15 +1,6 @@
-import React, { useState } from "react";
+import React, {Fragment, useState} from "react";
 import { NavLink } from "react-router-dom";
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Drawer,
-    List,
-    ListItem,
-    ListItemText,
-} from "@mui/material";
+import {AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText,} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./NavigationBar.css";
 
@@ -43,7 +34,7 @@ export default function NavigationBar() {
     );
 
     return (
-        <React.Fragment>
+        <Fragment>
             <AppBar position="fixed">
                 <Toolbar>
                     <Typography variant="h5" className="title">
@@ -70,7 +61,7 @@ export default function NavigationBar() {
                     {drawer}
                 </Drawer>
             </nav>
-        </React.Fragment>
+        </Fragment>
     );
 }
 
