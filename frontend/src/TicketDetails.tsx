@@ -27,6 +27,9 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
     const [customer, setCustomer] = useState<string>("");
     const [prio, setPrio] = useState<string>("");
 
+    const [imageURL, setImageURL] = useState("");
+
+
 
     const { id } = useParams<{ id: string }>();
 
@@ -88,6 +91,7 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
         const newComment = {
             datetime: new Date().toLocaleString("de-DE"),
             comment: commentText,
+            imageURL: imageURL,
         };
         const updatedTicket = {
             ...(ticket as Ticket),
@@ -147,8 +151,10 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                             <Paper key={c.datetime} elevation={1} sx={{ borderRadius: 4, p: 2, mt: 2 }}>
                                 <Typography variant="subtitle1">{c.datetime}</Typography>
                                 <Typography variant="body1">{c.comment}</Typography>
+                                {c.imageURL && <img src={c.imageURL} alt="Comment attachment" style={{ maxWidth: '100%', maxHeight: '300px' }} />}
                             </Paper>
                         ))}
+
                     </CardContent>
                     <CardActions>
                         <form onSubmit={handleCommentSubmit} style={{ width: '100%' }}>
@@ -156,6 +162,14 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                                 label="Add a comment"
                                 value={commentText}
                                 onChange={(event) => setCommentText(event.target.value)}
+                                fullWidth
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <TextField
+                                label="Image URL"
+                                value={imageURL}
+                                onChange={(event) => setImageURL(event.target.value)}
                                 fullWidth
                                 margin="normal"
                                 variant="outlined"

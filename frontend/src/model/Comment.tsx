@@ -1,5 +1,7 @@
 export type Comment= {
 
     datetime:string,
-    comment:string
+    comment:string,
+    imageURL: string
+
 }

@@ -32,7 +32,8 @@ export default function ReportTicket(props: Props) {
             customer: customer,
             prio: prio,
             status: "OPEN",
-            comment: [{ datetime: "System", comment: `Ticket created on ${now.toLocaleString()}` }]
+            comment: [{ datetime: "System", comment: `Ticket created on ${now.toLocaleString()}`,
+                imageURL: '' }]
         };
 
         props.addTicket(newTicket);

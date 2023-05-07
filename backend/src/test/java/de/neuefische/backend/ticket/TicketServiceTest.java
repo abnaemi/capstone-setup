@@ -20,9 +20,9 @@ class TicketServiceTest {
     @Test
     void getAllTickets() {
 
-        Comment comment = new Comment("1", "comment");
-        Comment comment2 = new Comment("1", "comment");
-        Comment comment3 = new Comment("1", "comment");
+        Comment comment = new Comment("1", "comment","");
+        Comment comment2 = new Comment("1", "comment","");
+        Comment comment3 = new Comment("1", "comment","");
         List <Comment> commentList = new ArrayList<>();
         commentList.add(comment);
         commentList.add(comment2);
@@ -43,7 +43,7 @@ class TicketServiceTest {
     @DirtiesContext
     @Test
     void createTicket() {
-        Comment comment = new Comment("1", "comment");
+        Comment comment = new Comment("1", "comment","");
         List <Comment> commentList = new ArrayList<>();
         commentList.add(comment);
         Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",commentList,TicketStatus.OPEN);
