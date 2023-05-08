@@ -6,6 +6,8 @@ public record Comment(
 
 
         String datetime,
-        String comment
+        String comment,
+        String imageURL
+
 ) {
 }
