@@ -3,6 +3,7 @@ import de.neuefische.backend.comment.Comment;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -36,7 +37,6 @@ class TicketServiceTest {
 
        verify (ticketRepository).findAll();
        assertEquals(List.of(expected), actual);
-        System.out.println(ticketService.getAllTickets());
 
 
     }
@@ -53,7 +53,6 @@ class TicketServiceTest {
 
         verify(ticketRepository).save(expected);
         assertEquals(actual,expected);
-        System.out.println(ticketService.getAllTickets());
 
 
 
@@ -80,32 +79,36 @@ class TicketServiceTest {
         ticketRepository.save(originalTicket);
         ticketService.deleteTicket("1");
         verify(ticketRepository).deleteById("1");
-
+        when(ticketRepository.findById("1")).thenReturn(Optional.empty());
+        assertFalse(ticketService.findById("1").isPresent());
     }
 
     @Test
     void findById_thenReturnOptionalTicket() {
         // given
-        Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
-        when(ticketRepository.findById("1")).thenReturn(Optional.of(expected));
+        Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
+        when(ticketRepository.findById("1"))
+                .thenReturn(Optional.of(originalTicket));
 
-        // when
         Optional<Ticket> actual = ticketService.findById("1");
+        Optional<Ticket> expected = Optional.of(originalTicket);
 
-        // then
-        assertEquals(expected, actual.get());
+        verify(ticketRepository).findById("1");
+        assertEquals(expected, actual);
     }
+
+
 
     @Test
     void whenFindById_withNonExistingId_thenReturnEmptyOptional() {
-        // given
-        when(ticketRepository.findById("1")).thenReturn(Optional.empty());
 
-        // when
-        Optional<Ticket> actual = ticketService.findById("1");
-
-        // then
-        assertEquals(Optional.empty(), actual);
+        when(ticketRepository.findById("1"))
+                .thenThrow(NoSuchElementException.class);
+        try {
+            ticketService.findById("1");
+            fail();
+        } catch (NoSuchElementException Ignored) {
+            verify(ticketRepository).findById("1");
+        }
     }
-
 }
