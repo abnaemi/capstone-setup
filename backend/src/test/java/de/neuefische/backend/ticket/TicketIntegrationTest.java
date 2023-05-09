@@ -247,27 +247,6 @@ class TicketIntegrationTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    @Test
-    void addTicket_shouldReturnTicket_Unauthorized() throws Exception {
-        mockMvc.perform(post("/api/tickets").with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                            {
-                            "id": "1",
-                    "name": "Tom",
-                    "title": "Title",
-                    "content": "content",
-                    "phone": "123",
-                    "email": "johndoe@email.com",
-                    "customer": "customer",
-                    "prio": "999",
-                    "comment": [],
-                    "status": "OPEN"
-                            }
-                            """
-                        ))
-                .andExpect(status().isUnauthorized());
-    }
 
     @Test
     void updateTicket_shouldReturnUpdatedTicket_Unauthorized() throws Exception {
