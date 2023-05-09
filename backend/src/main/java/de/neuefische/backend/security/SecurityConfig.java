@@ -2,6 +2,7 @@ package de.neuefische.backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,6 +41,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/users/me").permitAll()
+                .requestMatchers(HttpMethod.POST,"/api/tickets").permitAll()
                 .requestMatchers("/api/tickets").authenticated()
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()
