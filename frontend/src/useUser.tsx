@@ -16,7 +16,6 @@ export default function useUser(loadAllTickets: () => void) {
                     }
                 })
                 .catch((error) => {
-                    toast.error("Error checking logged-in user:");
                 })
                 .finally(() => {
                     setIsLoading(false);
