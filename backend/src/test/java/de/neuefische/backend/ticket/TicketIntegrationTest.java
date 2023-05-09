@@ -16,7 +16,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WithMockUser
+
+
+
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest
 @AutoConfigureMockMvc
 class TicketIntegrationTest {
@@ -32,7 +35,6 @@ class TicketIntegrationTest {
         Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
 
 
-    @DirtiesContext
     @Test
     @WithMockUser
     void getAll_ReturnEmptyListBcsNoTicketsExist() throws Exception {
@@ -46,7 +48,6 @@ class TicketIntegrationTest {
     }
 
     @WithMockUser
-    @DirtiesContext
     @Test
     void getAll_shouldReturnAllTickets() throws Exception {
         ticketRepository.save(ticketone);
@@ -75,7 +76,6 @@ class TicketIntegrationTest {
     }
     @WithMockUser
     @Test
-    @DirtiesContext
     void addTicket_shouldReturnTicket() throws Exception {
         mockMvc.perform(post("/api/tickets").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -114,7 +114,6 @@ class TicketIntegrationTest {
     }
     @WithMockUser
     @Test
-    @DirtiesContext
     void updateTicket_shouldReturnUpdatedTicket() throws Exception {
         // Given
         Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
@@ -160,7 +159,6 @@ class TicketIntegrationTest {
     }
     @WithMockUser
     @Test
-    @DirtiesContext
     void updateTicket_shouldThrowExceptionIfIdsDoNotMatch() throws Exception {
         // Given
         Ticket ticketone = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
@@ -194,7 +192,6 @@ class TicketIntegrationTest {
 
     @WithMockUser
     @Test
-    @DirtiesContext
     void deleteTicket_shouldDeleteTicket() throws Exception {
         // Given
         Ticket ticketToDelete = new Ticket("1", "Tom", "Title", "content", "123", "email", "customer", "999", new ArrayList<>(), TicketStatus.OPEN);
@@ -208,7 +205,6 @@ class TicketIntegrationTest {
         assertTrue(ticketRepository.findById("1").isEmpty());
     }
     @WithMockUser
-    @DirtiesContext
     @Test
     void getByID_shouldReturnTicketByID() throws Exception {
         // Given
