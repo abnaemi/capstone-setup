@@ -1,19 +1,20 @@
 package de.neuefische.backend.ticket;
 import de.neuefische.backend.comment.Comment;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+
 
 class TicketServiceTest {
 
     private final TicketRepository ticketRepository  = mock(TicketRepository.class);
     private final TicketService ticketService = new TicketService(ticketRepository);
+
 
 
 
@@ -28,7 +29,6 @@ class TicketServiceTest {
         commentList.add(comment2);
         commentList.add(comment3);
 
-
         Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",commentList, TicketStatus.OPEN);
 
        when(ticketRepository.findAll()).thenReturn(List.of(expected));
@@ -40,7 +40,6 @@ class TicketServiceTest {
 
 
     }
-    @DirtiesContext
     @Test
     void createTicket() {
         Comment comment = new Comment("1", "comment","");
@@ -58,55 +57,58 @@ class TicketServiceTest {
 
 
     }
-    @DirtiesContext
+
     @Test
     void updateTicket_updatesExistingTicket() {
         Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
-        ticketService.createTicket(originalTicket);
 
-        Ticket updateTicket = new Ticket("2","Max","NoTitle","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
-        ticketService.updateTicket(updateTicket);
 
-        List<Ticket> allTickets = ticketService.getAllTickets();
-        assertEquals(0, allTickets.size());
+        when(ticketRepository.save(originalTicket))
+                .thenReturn(originalTicket);
+        Ticket actual = ticketService.updateTicket(originalTicket);
+        verify(ticketRepository).save(originalTicket);
+        assertEquals(actual, originalTicket);
+
+
 
     }
 
-    @DirtiesContext
     @Test
     void deleteTicket_deletesExistingTicket() {
         Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",new ArrayList<>(), TicketStatus.OPEN);
-        ticketService.createTicket(originalTicket);
-
+        ticketRepository.save(originalTicket);
         ticketService.deleteTicket("1");
-
-        assertEquals(0,ticketService.getAllTickets().size());
-
+        verify(ticketRepository).deleteById("1");
+        when(ticketRepository.findById("1")).thenReturn(Optional.empty());
+        assertFalse(ticketService.findById("1").isPresent());
     }
 
     @Test
     void findById_thenReturnOptionalTicket() {
         // given
-        Ticket expected = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
-        when(ticketRepository.findById("1")).thenReturn(Optional.of(expected));
+        Ticket originalTicket = new Ticket("1","Tom","Title","content","123","email","customer","999",null, TicketStatus.OPEN);
+        when(ticketRepository.findById("1"))
+                .thenReturn(Optional.of(originalTicket));
 
-        // when
         Optional<Ticket> actual = ticketService.findById("1");
+        Optional<Ticket> expected = Optional.of(originalTicket);
 
-        // then
-        assertEquals(expected, actual.get());
+        verify(ticketRepository).findById("1");
+        assertEquals(expected, actual);
     }
+
+
 
     @Test
     void whenFindById_withNonExistingId_thenReturnEmptyOptional() {
-        // given
-        when(ticketRepository.findById("1")).thenReturn(Optional.empty());
 
-        // when
-        Optional<Ticket> actual = ticketService.findById("1");
-
-        // then
-        assertEquals(Optional.empty(), actual);
+        when(ticketRepository.findById("1"))
+                .thenThrow(NoSuchElementException.class);
+        try {
+            ticketService.findById("1");
+            fail();
+        } catch (NoSuchElementException Ignored) {
+            verify(ticketRepository).findById("1");
+        }
     }
-
 }
