@@ -112,7 +112,7 @@ export default function TicketGallery(props: Props) {
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 },}}>
-                Status Of All Tickets
+                Status Tickets
             </Button>
             <Dialog
                 open={openModal}
@@ -151,7 +151,7 @@ export default function TicketGallery(props: Props) {
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 }, }} >
-                Prio Of All Tickets
+                Prio Tickets
             </Button>
             <Dialog
                 open={openPriorityModal}
