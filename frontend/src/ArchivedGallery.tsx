@@ -60,7 +60,7 @@ export default function TicketGallery(props: Props) {
                         <TextField
                             value={searchTerm}
                             onChange={handleSearchChange}
-                            fullWidth
+
                             placeholder="Search by ID"
                             InputProps={{
                                 endAdornment: (
@@ -68,6 +68,7 @@ export default function TicketGallery(props: Props) {
                                         <Search />
                                     </InputAdornment>
                                 ),
+                                style: {  marginLeft:"-10px", marginBottom: "10px",  width: "135%"},
                             }}
                         />
                     </Grid>

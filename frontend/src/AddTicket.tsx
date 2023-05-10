@@ -147,10 +147,6 @@ export default function AddTicket(props: Props) {
                 variant="contained"
                 startIcon={<SaveIcon />}
                 onClick={onSaveTicket}
-                sx={{ backgroundColor: '#5F7ADB',
-                    '&:hover': {
-                        backgroundColor: '#4a5fa8',
-                    }, }}
             >
                 Save
             </Button>

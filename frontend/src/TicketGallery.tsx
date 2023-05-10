@@ -4,16 +4,7 @@ import TicketCard from "./TicketCard";
 import React, {ChangeEvent, useState} from "react";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
-import TicketCustomerGraph from "./TicketCustomerGraph";
-import {PieChart} from "recharts";
-import {
-    PieChartOutline,
-    PieChartOutlined,
-    PieChartOutlineRounded,
-    PieChartRounded,
-    PieChartSharp,
-    PieChartTwoTone
-} from "@mui/icons-material";
+import {PieChartRounded,} from "@mui/icons-material";
 
 
 
@@ -128,10 +119,6 @@ export default function TicketGallery(props: Props) {
                     color="primary"
                     onClick={handleOpenModal}
                     sx={{
-                        backgroundColor: '#5F7ADB',
-                        '&:hover': {
-                            backgroundColor: '#4a5fa8',
-                        },
                         marginRight: 2,
                         marginTop:1,
                     }}
@@ -155,10 +142,6 @@ export default function TicketGallery(props: Props) {
                     color="primary"
                     onClick={handleOpenPriorityModal}
                     sx={{
-                        backgroundColor: '#5F7ADB',
-                        '&:hover': {
-                            backgroundColor: '#4a5fa8',
-                        },
                         marginRight: 2,
                         marginTop:1,
                     }}
@@ -251,12 +234,7 @@ export default function TicketGallery(props: Props) {
                     color="primary"
                     sx={{
                         marginTop: 2,
-                        marginBottom: 2,
-
-                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB' ,
-                            '&:hover': {
-                                backgroundColor: '#4a5fa8',
-                            }, },
+                        marginBottom: 2
                     }}
                 />
             </div>
@@ -279,12 +257,7 @@ export default function TicketGallery(props: Props) {
                     color="primary"
                     sx={{
                         marginTop: 2,
-                        marginBottom: 2,
-
-                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB',
-                            '&:hover': {
-                                backgroundColor: '#4a5fa8',
-                            }, },
+                        marginBottom: 2
                     }}
                 />
             </div>
@@ -307,12 +280,7 @@ export default function TicketGallery(props: Props) {
                     color="primary"
                     sx={{
                         marginTop: 2,
-                        marginBottom: 2,
-
-                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB',
-                            '&:hover': {
-                                backgroundColor: '#4a5fa8',
-                            }, },
+                        marginBottom: 2
                     }}
                 />
             </div>

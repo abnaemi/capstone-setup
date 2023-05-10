@@ -53,10 +53,7 @@ export default function LoginPage(props: Props) {
                                 />
                             </Box>
                             <Box display="flex" justifyContent="center">
-                                <Button variant="contained" color="primary" type="submit" sx={{ backgroundColor: '#5F7ADB' ,
-                                    '&:hover': {
-                                        backgroundColor: '#4a5fa8',
-                                    },}}>
+                                <Button variant="contained" color="primary" type="submit">
                                     Login
                                 </Button>
                             </Box>
