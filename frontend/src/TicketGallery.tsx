@@ -112,26 +112,27 @@ export default function TicketGallery(props: Props) {
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 },}}>
-                Show Ticket Status Graph
+                Status Of All Tickets
             </Button>
             <Dialog
                 open={openModal}
                 onClose={handleCloseModal}
                 maxWidth="md"
-                fullWidth
+
             >
-                <DialogTitle>Ticket Status Graph</DialogTitle>
+                <DialogTitle>This Graph Shows The Total Amount Of Each Status</DialogTitle>
                 <DialogContent>
                     <TicketStatusGraph tickets={props.tickets} />
                 </DialogContent>
             </Dialog>
+            {/*
 
 
             <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 }, }}>
-                Show Ticket Customer Graph
+                All Customer Status
             </Button>
             <Dialog
                 open={openCustomerModal}
@@ -145,20 +146,20 @@ export default function TicketGallery(props: Props) {
                 </DialogContent>
             </Dialog>
 
-
+*/}
             <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 }, }} >
-                Show Ticket Priority Graph
+                Prio Of All Tickets
             </Button>
             <Dialog
                 open={openPriorityModal}
                 onClose={handleClosePriorityModal}
                 maxWidth="md"
-                fullWidth
+
             >
-                <DialogTitle>Ticket Priority Graph</DialogTitle>
+                <DialogTitle>This Graph Shows The Total Amount Of Each Prio</DialogTitle>
                 <DialogContent>
                     <TicketPriorityGraph tickets={props.tickets} />
                 </DialogContent>
