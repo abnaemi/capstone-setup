@@ -108,7 +108,10 @@ export default function TicketGallery(props: Props) {
 
     return (
         <div>
-            <Button variant="contained" color="primary" onClick={handleOpenModal}>
+            <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{ backgroundColor: '#5F7ADB' ,
+                '&:hover': {
+                    backgroundColor: '#4a5fa8',
+                },}}>
                 Show Ticket Status Graph
             </Button>
             <Dialog
@@ -124,7 +127,10 @@ export default function TicketGallery(props: Props) {
             </Dialog>
 
 
-            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2 }}>
+            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+                '&:hover': {
+                    backgroundColor: '#4a5fa8',
+                }, }}>
                 Show Ticket Customer Graph
             </Button>
             <Dialog
@@ -140,7 +146,10 @@ export default function TicketGallery(props: Props) {
             </Dialog>
 
 
-            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2 }}>
+            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+                '&:hover': {
+                    backgroundColor: '#4a5fa8',
+                }, }} >
                 Show Ticket Priority Graph
             </Button>
             <Dialog
@@ -157,17 +166,23 @@ export default function TicketGallery(props: Props) {
 
             <Button
                 variant="contained"
-
                 onClick={props.refreshTickets}
-                sx={{ marginLeft: 2 }}
+                sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+                    '&:hover': {
+                        backgroundColor: '#4a5fa8',
+                    }, }}
             >
                 Refresh Tickets
             </Button>
+
             <Button
                 variant="contained"
                 color="error"
                 onClick={props.onLogout}
-                sx={{ marginLeft: 2 }}
+                sx={{ marginLeft: 2  ,
+                    '&:hover': {
+                        backgroundColor: '#A32222',
+                    }, }}
             >
                 Logout
             </Button>
@@ -178,14 +193,27 @@ export default function TicketGallery(props: Props) {
                 {openTickets
                     .slice((openPage - 1) * ticketsPerPage, openPage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(openTickets.length / ticketsPerPage)}
                     page={openPage}
                     onChange={handleOpenPageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2,
+
+                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB' ,
+                            '&:hover': {
+                                backgroundColor: '#4a5fa8',
+                            }, },
+                    }}
                 />
             </div>
             <div className="tickets">
@@ -193,14 +221,27 @@ export default function TicketGallery(props: Props) {
                 {inProgressTickets
                     .slice((inProgressPage - 1) * ticketsPerPage, inProgressPage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(inProgressTickets.length / ticketsPerPage)}
                     page={inProgressPage}
                     onChange={handleInProgressPageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2,
+
+                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB',
+                            '&:hover': {
+                                backgroundColor: '#4a5fa8',
+                            }, },
+                    }}
                 />
             </div>
             <div className="tickets">
@@ -208,16 +249,30 @@ export default function TicketGallery(props: Props) {
                 {doneTickets
                     .slice((donePage - 1) * ticketsPerPage, donePage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(doneTickets.length / ticketsPerPage)}
                     page={donePage}
                     onChange={handleDonePageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2,
+
+                        '& .MuiPaginationItem-root.Mui-selected': { backgroundColor: '#5F7ADB',
+                            '&:hover': {
+                                backgroundColor: '#4a5fa8',
+                            }, },
+                    }}
                 />
             </div>
+
         </div>
     );
 }

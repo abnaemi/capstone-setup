@@ -174,7 +174,10 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                                 margin="normal"
                                 variant="outlined"
                             />
-                            <Button type="submit" variant="contained">
+                            <Button type="submit" variant="contained" sx={{ backgroundColor: '#5F7ADB' ,
+                                '&:hover': {
+                                    backgroundColor: '#4a5fa8',
+                                },}}>
                                 Add Comment
                             </Button>
                         </form>
@@ -267,6 +270,10 @@ export default function TicketDetail({ onTicketUpdate }: Props) {
                     color="primary"
                     onClick={updateTicket}
                     style={{ marginTop: "1rem" }}
+                    sx={{ backgroundColor: '#5F7ADB' ,
+                        '&:hover': {
+                            backgroundColor: '#4a5fa8',
+                        },}}
                 >
                     Save
                 </Button>

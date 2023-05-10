@@ -75,21 +75,33 @@ export default function TicketCard(props: Props) {
                         <Grid item xs={12} sm={2}>
                             <ButtonGroup fullWidth>
                                 {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
-                                    <Button variant="contained" size="small" onClick={changeStatusPrevious}>
+                                    <Button variant="contained" size="small" onClick={changeStatusPrevious} sx={{ backgroundColor: '#5F7ADB' ,
+                                        '&:hover': {
+                                            backgroundColor: '#4a5fa8',
+                                        },  }}>
                                         <KeyboardArrowLeftIcon />
                                     </Button>
                                 )}
                                 {props.ticket.status !== 'ARCHIVED' && (
-                                    <Button variant="contained" size="small" onClick={changeStatusClick}>
+                                    <Button variant="contained" size="small" onClick={changeStatusClick} sx={{ backgroundColor: '#5F7ADB' ,
+                                        '&:hover': {
+                                            backgroundColor: '#4a5fa8',
+                                        }, }}>
                                         <KeyboardArrowRightIcon />
                                     </Button>
                                 )}
                                 {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
-                                    <Button variant="contained" size="small" onClick={deleteClick}>
+                                    <Button variant="contained" size="small" onClick={deleteClick} sx={{ backgroundColor: '#5F7ADB' ,
+                                        '&:hover': {
+                                            backgroundColor: '#4a5fa8',
+                                        },}}>
                                         <DeleteIcon />
                                     </Button>
                                 )}
-                                <Button variant="contained" size="small" startIcon={<InfoIcon />} onClick={() => { navigate("/tickets/details/" + props.ticket.id) }}>
+                                <Button variant="contained" size="small" startIcon={<InfoIcon />} sx={{ backgroundColor: '#5F7ADB',
+                                    '&:hover': {
+                                        backgroundColor: '#4a5fa8',
+                                    }, }} onClick={() => { navigate("/tickets/details/" + props.ticket.id) }}>
                                 </Button>
                             </ButtonGroup>
                         </Grid>

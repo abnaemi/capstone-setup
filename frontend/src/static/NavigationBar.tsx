@@ -35,7 +35,7 @@ export default function NavigationBar() {
 
     return (
         <Fragment>
-            <AppBar position="fixed">
+            <AppBar position="fixed" style={{backgroundColor: "#2e3239"}}>
                 <Toolbar>
                     <Typography variant="h5" className="title">
                         Ticketsystem
@@ -62,6 +62,7 @@ export default function NavigationBar() {
                 </Drawer>
             </nav>
         </Fragment>
+
     );
 }
 

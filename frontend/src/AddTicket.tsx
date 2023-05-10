@@ -145,8 +145,9 @@ export default function AddTicket(props: Props) {
 
             <Button
                 variant="outlined"
-                startIcon={<SaveIcon />}
+                startIcon={<SaveIcon  />}
                 onClick={onSaveTicket}
+
             >
                 Save
             </Button>

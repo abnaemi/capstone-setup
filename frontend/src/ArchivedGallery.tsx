@@ -33,7 +33,7 @@ export default function TicketGallery(props: Props) {
                     </Grid>
                     <Grid item xs={2} sm={2} sx={{ minWidth: '100px' }}>
                         <Typography variant="h6" component="h2" sx={{ fontSize: 14, fontWeight: "bold" }}>
-                            Title
+                            &nbsp; &nbsp;  Title
                         </Typography>
                     </Grid>
                     <Grid item xs={2} sm={2} sx={{ minWidth: '100px' }}>
