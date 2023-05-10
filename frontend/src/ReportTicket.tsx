@@ -116,8 +116,12 @@ export default function ReportTicket(props: Props) {
                 />
 
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     startIcon={<SaveIcon />}
+                    sx={{ backgroundColor: '#5F7ADB',
+                        '&:hover': {
+                            backgroundColor: '#4a5fa8',
+                        }, }}
                     onClick={onSaveTicket}
                     disabled={!title || !name || !phone || !email || !content}
                 >
