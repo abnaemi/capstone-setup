@@ -163,7 +163,7 @@ export default function TicketGallery(props: Props) {
                     <TicketPriorityGraph tickets={props.tickets} />
                 </DialogContent>
             </Dialog>
-
+            {/*
             <Button
                 variant="contained"
                 onClick={props.refreshTickets}
@@ -175,17 +175,22 @@ export default function TicketGallery(props: Props) {
                 Refresh Tickets
             </Button>
 
-            <Button
-                variant="contained"
-                color="error"
-                onClick={props.onLogout}
-                sx={{ marginLeft: 2  ,
-                    '&:hover': {
-                        backgroundColor: '#A32222',
-                    }, }}
-            >
-                Logout
-            </Button>
+
+<Button
+    variant="contained"
+    color="error"
+    onClick={props.onLogout}
+    sx={{
+        marginLeft: 2,
+        '&:hover': {
+            backgroundColor: '#A32222',
+        },
+    }}
+>
+    Logout
+</Button>
+*/}
+
 
 
             <div className="tickets">
