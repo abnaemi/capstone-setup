@@ -1,10 +1,11 @@
-import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle, Box } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import React, {ChangeEvent, useState} from "react";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
 import TicketCustomerGraph from "./TicketCustomerGraph";
+import {ShowChart} from "@mui/icons-material";
 
 
 
@@ -108,27 +109,71 @@ export default function TicketGallery(props: Props) {
 
     return (
         <div>
-            <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{ backgroundColor: '#5F7ADB' ,
-                '&:hover': {
-                    backgroundColor: '#4a5fa8',
-                },}}>
-                Status Tickets
-            </Button>
-            <Dialog
-                open={openModal}
-                onClose={handleCloseModal}
-                maxWidth="md"
+            <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="flex-end"
 
             >
-                <DialogTitle>This Graph Shows The Total Amount Of Each Status</DialogTitle>
-                <DialogContent>
-                    <TicketStatusGraph tickets={props.tickets} />
-                </DialogContent>
-            </Dialog>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenModal}
+                    sx={{
+                        backgroundColor: '#5F7ADB',
+                        '&:hover': {
+                            backgroundColor: '#4a5fa8',
+                        },
+                        marginRight: 2,
+                        marginTop:1,
+                    }}
+                    startIcon={<ShowChart />}
+                >
+                    Status
+                </Button>
+                <Dialog
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    maxWidth="md"
+                >
+                    <DialogTitle>This Graph Shows The Total Amount Of Each Status</DialogTitle>
+                    <DialogContent>
+                        <TicketStatusGraph tickets={props.tickets} />
+                    </DialogContent>
+                </Dialog>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenPriorityModal}
+                    sx={{
+                        backgroundColor: '#5F7ADB',
+                        '&:hover': {
+                            backgroundColor: '#4a5fa8',
+                        },
+                        marginRight: 2,
+                        marginTop:1,
+                    }}
+                    startIcon={<ShowChart />}
+                >
+                    Prio
+                </Button>
+                <Dialog
+                    open={openPriorityModal}
+                    onClose={handleClosePriorityModal}
+                    maxWidth="md"
+                >
+                    <DialogTitle>This Graph Shows The Total Amount Of Each Prio</DialogTitle>
+                    <DialogContent>
+                        <TicketPriorityGraph tickets={props.tickets} />
+                    </DialogContent>
+                </Dialog>
+            </Box>
+
             {/*
 
 
-            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+         <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
                 '&:hover': {
                     backgroundColor: '#4a5fa8',
                 }, }}>
@@ -147,23 +192,8 @@ export default function TicketGallery(props: Props) {
             </Dialog>
 
 */}
-            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
-                '&:hover': {
-                    backgroundColor: '#4a5fa8',
-                }, }} >
-                Prio Tickets
-            </Button>
-            <Dialog
-                open={openPriorityModal}
-                onClose={handleClosePriorityModal}
-                maxWidth="md"
 
-            >
-                <DialogTitle>This Graph Shows The Total Amount Of Each Prio</DialogTitle>
-                <DialogContent>
-                    <TicketPriorityGraph tickets={props.tickets} />
-                </DialogContent>
-            </Dialog>
+
             {/*
             <Button
                 variant="contained"
