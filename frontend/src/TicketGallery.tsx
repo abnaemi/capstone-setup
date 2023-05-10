@@ -5,7 +5,15 @@ import React, {ChangeEvent, useState} from "react";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
 import TicketCustomerGraph from "./TicketCustomerGraph";
-import {ShowChart} from "@mui/icons-material";
+import {PieChart} from "recharts";
+import {
+    PieChartOutline,
+    PieChartOutlined,
+    PieChartOutlineRounded,
+    PieChartRounded,
+    PieChartSharp,
+    PieChartTwoTone
+} from "@mui/icons-material";
 
 
 
@@ -127,7 +135,7 @@ export default function TicketGallery(props: Props) {
                         marginRight: 2,
                         marginTop:1,
                     }}
-                    startIcon={<ShowChart />}
+                    startIcon={<PieChartRounded />}
                 >
                     Status
                 </Button>
@@ -154,7 +162,7 @@ export default function TicketGallery(props: Props) {
                         marginRight: 2,
                         marginTop:1,
                     }}
-                    startIcon={<ShowChart />}
+                    startIcon={<PieChartRounded />}
                 >
                     Prio
                 </Button>
