@@ -68,7 +68,7 @@ export default function TicketGallery(props: Props) {
                                         <Search />
                                     </InputAdornment>
                                 ),
-                                style: {  marginLeft:"-10px", marginBottom: "10px",  width: "135%"},
+                                style: {  marginLeft:"-10px", marginBottom: "10px",  width: "120%"},
                             }}
                         />
                     </Grid>
