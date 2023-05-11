@@ -67,20 +67,6 @@ export default function TicketGallery(props: Props) {
     };
 
 
-    const [openCustomerModal, setOpenCustomerModal] = useState(false);
-
-    const handleOpenCustomerModal = () => {
-        setOpenCustomerModal(true);
-    };
-
-    const handleCloseCustomerModal = () => {
-        setOpenCustomerModal(false);
-    };
-
-
-
-
-
     const renderGridHeaders = (sectionTitle: string) => (
         <Grid container spacing={2} sx={{ borderBottom: '1px solid #e0e0e0', paddingBottom: '-10px' }}>
             <Grid item xs={12}>
@@ -160,59 +146,6 @@ export default function TicketGallery(props: Props) {
                     </DialogContent>
                 </Dialog>
             </Box>
-
-            {/*
-
-
-         <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
-                '&:hover': {
-                    backgroundColor: '#4a5fa8',
-                }, }}>
-                All Customer Status
-            </Button>
-            <Dialog
-                open={openCustomerModal}
-                onClose={handleCloseCustomerModal}
-                maxWidth="md"
-                fullWidth
-            >
-                <DialogTitle>Ticket Customer Graph</DialogTitle>
-                <DialogContent>
-                    <TicketCustomerGraph tickets={props.tickets} />
-                </DialogContent>
-            </Dialog>
-
-*/}
-
-
-            {/*
-            <Button
-                variant="contained"
-                onClick={props.refreshTickets}
-                sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
-                    '&:hover': {
-                        backgroundColor: '#4a5fa8',
-                    }, }}
-            >
-                Refresh Tickets
-            </Button>
-
-
-<Button
-    variant="contained"
-    color="error"
-    onClick={props.onLogout}
-    sx={{
-        marginLeft: 2,
-        '&:hover': {
-            backgroundColor: '#A32222',
-        },
-    }}
->
-    Logout
-</Button>
-*/}
-
 
 
             <div className="tickets">
