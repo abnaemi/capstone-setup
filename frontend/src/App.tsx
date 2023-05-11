@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import './App.css';
 import Header from "./static/Header";
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,9 +19,8 @@ function App() {
     const { tickets, addTicket, deleteTicket, updateTicket, loadAllTickets } =
         useTickets();
 
-    const memoizedLoadAllTickets = useCallback(loadAllTickets, [loadAllTickets]);
 
-    const { user, login, logout, isLoading } = useUser(memoizedLoadAllTickets);
+    const { user, login, logout, isLoading } = useUser();
     useEffect(() => {
         if (user) {
 

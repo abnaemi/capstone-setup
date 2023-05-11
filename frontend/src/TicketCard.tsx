@@ -75,17 +75,17 @@ export default function TicketCard(props: Props) {
                         <Grid item xs={12} sm={2}>
                             <ButtonGroup fullWidth>
                                 {props.ticket.status !== 'OPEN' && props.ticket.status !== 'IN_PROGRESS' && (
-                                    <Button variant="contained" size="small" onClick={changeStatusPrevious}>
+                                    <Button variant="contained" size="small" onClick={changeStatusPrevious} >
                                         <KeyboardArrowLeftIcon />
                                     </Button>
                                 )}
                                 {props.ticket.status !== 'ARCHIVED' && (
-                                    <Button variant="contained" size="small" onClick={changeStatusClick}>
+                                    <Button variant="contained" size="small" onClick={changeStatusClick} >
                                         <KeyboardArrowRightIcon />
                                     </Button>
                                 )}
                                 {(props.ticket.status === 'ARCHIVED' || props.ticket.status === 'OPEN') && (
-                                    <Button variant="contained" size="small" onClick={deleteClick}>
+                                    <Button variant="contained" size="small" onClick={deleteClick} >
                                         <DeleteIcon />
                                     </Button>
                                 )}

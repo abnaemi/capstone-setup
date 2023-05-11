@@ -1,10 +1,10 @@
-import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Grid, Typography, Pagination, Button, Dialog, DialogContent, DialogTitle, Box } from "@mui/material";
 import { Ticket } from "./model/Ticket";
 import TicketCard from "./TicketCard";
 import React, {ChangeEvent, useState} from "react";
 import TicketStatusGraph from "./TicketStatusGraph";
 import TicketPriorityGraph from "./TicketPrioGraph";
-import TicketCustomerGraph from "./TicketCustomerGraph";
+import {PieChartRounded,} from "@mui/icons-material";
 
 
 
@@ -34,7 +34,7 @@ export default function TicketGallery(props: Props) {
     const [donePage, setDonePage] = useState(1);
     const [openModal, setOpenModal] = useState(false);
 
-    const ticketsPerPage = 10;
+    const ticketsPerPage = 6;
 
     const handleOpenPageChange = (event: ChangeEvent<unknown>, value: number) => {
         setOpenPage(value);
@@ -108,24 +108,67 @@ export default function TicketGallery(props: Props) {
 
     return (
         <div>
-            <Button variant="contained" color="primary" onClick={handleOpenModal}>
-                Show Ticket Status Graph
-            </Button>
-            <Dialog
-                open={openModal}
-                onClose={handleCloseModal}
-                maxWidth="md"
-                fullWidth
+            <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="flex-end"
+
             >
-                <DialogTitle>Ticket Status Graph</DialogTitle>
-                <DialogContent>
-                    <TicketStatusGraph tickets={props.tickets} />
-                </DialogContent>
-            </Dialog>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenModal}
+                    sx={{
+                        marginRight: 2,
+                        marginTop:1,
+                    }}
+                    startIcon={<PieChartRounded />}
+                >
+                    Status
+                </Button>
+                <Dialog
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    maxWidth="md"
+                >
+                    <DialogTitle>This Graph Shows The Total Amount Of Each Status</DialogTitle>
+                    <DialogContent>
+                        <TicketStatusGraph tickets={props.tickets} />
+                    </DialogContent>
+                </Dialog>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenPriorityModal}
+                    sx={{
+                        marginRight: 2,
+                        marginTop:1,
+                    }}
+                    startIcon={<PieChartRounded />}
+                >
+                    Prio
+                </Button>
+                <Dialog
+                    open={openPriorityModal}
+                    onClose={handleClosePriorityModal}
+                    maxWidth="md"
+                >
+                    <DialogTitle>This Graph Shows The Total Amount Of Each Prio</DialogTitle>
+                    <DialogContent>
+                        <TicketPriorityGraph tickets={props.tickets} />
+                    </DialogContent>
+                </Dialog>
+            </Box>
+
+            {/*
 
 
-            <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2 }}>
-                Show Ticket Customer Graph
+         <Button variant="contained" color="primary" onClick={handleOpenCustomerModal} sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+                '&:hover': {
+                    backgroundColor: '#4a5fa8',
+                }, }}>
+                All Customer Status
             </Button>
             <Dialog
                 open={openCustomerModal}
@@ -139,38 +182,37 @@ export default function TicketGallery(props: Props) {
                 </DialogContent>
             </Dialog>
 
+*/}
 
-            <Button variant="contained" color="primary" onClick={handleOpenPriorityModal} sx={{ marginLeft: 2 }}>
-                Show Ticket Priority Graph
-            </Button>
-            <Dialog
-                open={openPriorityModal}
-                onClose={handleClosePriorityModal}
-                maxWidth="md"
-                fullWidth
-            >
-                <DialogTitle>Ticket Priority Graph</DialogTitle>
-                <DialogContent>
-                    <TicketPriorityGraph tickets={props.tickets} />
-                </DialogContent>
-            </Dialog>
 
+            {/*
             <Button
                 variant="contained"
-
                 onClick={props.refreshTickets}
-                sx={{ marginLeft: 2 }}
+                sx={{ marginLeft: 2, backgroundColor: '#5F7ADB',
+                    '&:hover': {
+                        backgroundColor: '#4a5fa8',
+                    }, }}
             >
                 Refresh Tickets
             </Button>
-            <Button
-                variant="contained"
-                color="error"
-                onClick={props.onLogout}
-                sx={{ marginLeft: 2 }}
-            >
-                Logout
-            </Button>
+
+
+<Button
+    variant="contained"
+    color="error"
+    onClick={props.onLogout}
+    sx={{
+        marginLeft: 2,
+        '&:hover': {
+            backgroundColor: '#A32222',
+        },
+    }}
+>
+    Logout
+</Button>
+*/}
+
 
 
             <div className="tickets">
@@ -178,14 +220,22 @@ export default function TicketGallery(props: Props) {
                 {openTickets
                     .slice((openPage - 1) * ticketsPerPage, openPage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(openTickets.length / ticketsPerPage)}
                     page={openPage}
                     onChange={handleOpenPageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2
+                    }}
                 />
             </div>
             <div className="tickets">
@@ -193,14 +243,22 @@ export default function TicketGallery(props: Props) {
                 {inProgressTickets
                     .slice((inProgressPage - 1) * ticketsPerPage, inProgressPage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(inProgressTickets.length / ticketsPerPage)}
                     page={inProgressPage}
                     onChange={handleInProgressPageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2
+                    }}
                 />
             </div>
             <div className="tickets">
@@ -208,16 +266,25 @@ export default function TicketGallery(props: Props) {
                 {doneTickets
                     .slice((donePage - 1) * ticketsPerPage, donePage * ticketsPerPage)
                     .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} updateTicket={props.updateTicket} deleteTicket={props.deleteTicket} />
+                        <TicketCard
+                            key={ticket.id}
+                            ticket={ticket}
+                            updateTicket={props.updateTicket}
+                            deleteTicket={props.deleteTicket}
+                        />
                     ))}
                 <Pagination
                     count={Math.ceil(doneTickets.length / ticketsPerPage)}
                     page={donePage}
                     onChange={handleDonePageChange}
                     color="primary"
-                    sx={{ marginTop: 2, marginBottom: 2 }}
+                    sx={{
+                        marginTop: 2,
+                        marginBottom: 2
+                    }}
                 />
             </div>
+
         </div>
     );
 }

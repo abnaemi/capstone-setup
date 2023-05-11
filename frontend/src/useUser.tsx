@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function useUser(loadAllTickets: () => void) {
+export default function useUser() {
     const [user, setUser] = useState();
     const [isLoading, setIsLoading] = useState(true);
 

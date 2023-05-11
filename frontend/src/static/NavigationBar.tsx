@@ -62,6 +62,7 @@ export default function NavigationBar() {
                 </Drawer>
             </nav>
         </Fragment>
+
     );
 }
 
