@@ -34,7 +34,7 @@ export default function TicketGallery(props: Props) {
     const [donePage, setDonePage] = useState(1);
     const [openModal, setOpenModal] = useState(false);
 
-    const ticketsPerPage = 10;
+    const ticketsPerPage = 6;
 
     const handleOpenPageChange = (event: ChangeEvent<unknown>, value: number) => {
         setOpenPage(value);
